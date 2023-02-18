@@ -15,66 +15,53 @@ class LeaguesTableView: UITableViewController {
     var leage_name : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
         guard let sport_type = sport else{return}
         
         print(sport_type )
+       changeSportTypeName()
+
+//        switch(sport){
+//        case "Football" :
+//            sport = "football"
+//        case "Tennis" :
+//            sport = "tennis"
+//        case "Basketball":
+//            sport = "basketball"
+//        case "Cricket":
+//            sport = "cricket"
+//        default:
+//           print("no type")
+//        }
         
-        switch(sport_type)
-        {
-        case "Football" :
-            Football.fetchFootballLeages {  data in
-                
-                for i in 0..<(data?.result.count ?? 0){
-                    self.leage_name.append(data?.result[i].league_name ?? "")
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
+        ApiService.fetchLeagues(sport_type: sport ?? "football") { data in
+            for i in 0..<(data?.result.count ?? 0){
+                self.leage_name.append(data?.result[i].league_name ?? "")
             }
-        case "Basketball","Tennis" :
-            var sport = sport_type
-            if sport_type == "Basketball"
-            {
-                sport = "basketball"
-            }else{
-                sport = "tennis"}
-            TennisOrBasketball.fetchSportsLeages(sport_type: sport) {  data in
-                
-                for i in 0..<(data?.result.count ?? 0){
-                    self.leage_name.append(data?.result[i].league_name ?? "")
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
+
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
-        case "Cricket" :
-            Cricket.fetchCricketLeages{  data in
-                
-                for i in 0..<(data?.result.count ?? 0){
-                    self.leage_name.append(data?.result[i].league_name ?? "")
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
-            }
-        default:
-            print("no data")
         }
         
+
         
     }
 
+    func changeSportTypeName(){
+        switch(sport){
+        case "Football" :
+            sport = "football"
+        case "Tennis" :
+            sport = "tennis"
+        case "Basketball":
+            sport = "basketball"
+        case "Cricket":
+            sport = "cricket"
+        default:
+           print("no type")
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
