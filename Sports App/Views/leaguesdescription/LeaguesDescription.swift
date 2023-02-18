@@ -9,8 +9,9 @@ import UIKit
 import Kingfisher
 class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   
-//    var upcommingEvents = [Event]()
+
     var events :UpComingEvents?
+    var latestEvents: LatestRes?
     var sportType :String?
     
     @IBOutlet weak var upComming: UICollectionView!
@@ -37,27 +38,36 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         
        changeSportTypeName()
         
-        ApiService.fetchUpComming(sport_type: sportType ?? "") { data in
         
+        
+            
+        ApiService.fetchUpComming(sport_type: self.sportType ?? "") {  data in
             self.events = data
-//            if let events = data?.result {
-//                self.upcommingEvents = events
-//
-//            }
-            
-            DispatchQueue.main.async {
+            DispatchQueue.main.async{
                 UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
-                                    self.upComming.reloadData()
-                                    self.teams.reloadData()
-                                        self.upComming.alpha = 1
-                                        fadeView.removeFromSuperview()
-                                        self.activityView.stopAnimating()
-                                    }, completion: nil)
+                    self.upComming.reloadData()
+                    self.teams.reloadData()
+                    self.latestResult.reloadData()
+                    self.upComming.alpha = 1
+                    fadeView.removeFromSuperview()
+                    self.activityView.stopAnimating()
+                }, completion: nil)
             }
-            
-
         }
-        
+
+    
+        ApiService.fetchLatestRes(sport_type: self.sportType ?? "") { data in
+            self.latestEvents = data
+            DispatchQueue.main.async{
+                UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                    self.latestResult.reloadData()
+                    self.latestResult.alpha = 1
+                    fadeView.removeFromSuperview()
+                    self.activityView.stopAnimating()
+                }, completion: nil)
+                
+            }
+        }
         
         
     }
@@ -87,17 +97,11 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == upComming || collectionView == teams){
-            
-//            return upcommingEvents.count
+ 
             return events?.result.count ?? 0
         }
-//        if (collectionView == latestResult){
-//
-//            return 20
-//
-//        }
         
-        return 20
+        return latestEvents?.result.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -127,9 +131,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
                 cell.team2Label.text = events?.result[indexPath.row].event_away_team
                 
                 cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].home_team_logo ?? ""))
-                
-//                print("p1 img : "+(events?.result[indexPath.row].event_home_team_logo ?? ""))
-
+ 
                 cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""))
                 cell.date.text = events?.result[indexPath.row].event_date
                 
@@ -168,9 +170,21 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         //------------- latest result collection --------------
          if (collectionView == latestResult){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latestresult", for: indexPath) as! LatestResultItem
-            cell.team2Label.text = "real"
-            cell.team1Label.text = "ahly"
-            cell.scoreLabel.text = "2-1"
+             switch(sportType){
+             case "tennis":
+                 cell.team1Label.text = latestEvents?.result[indexPath.row].event_first_player
+                 cell.team2Label.text = latestEvents?.result[indexPath.row].event_second_player
+                 cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
+             case "cricket":
+                 // get it from the same api of upcomming abd teams as it not found in latest res api
+                 cell.team1Label.text = events?.result[indexPath.row].event_home_team
+                 cell.team2Label.text = events?.result[indexPath.row].event_away_team
+                 //cell.scoreLabel.text = events?.result[indexPath.row]
+             default :
+                 cell.team1Label.text = latestEvents?.result[indexPath.row].event_home_team
+                 cell.team2Label.text = latestEvents?.result[indexPath.row].event_away_team
+                 cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
+             }
             
             return cell
             

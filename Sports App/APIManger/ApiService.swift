@@ -51,5 +51,28 @@ class ApiService {
             }
     }
     
+    
+    static func fetchLatestRes(sport_type:String ,complition : @escaping (LatestRes?)-> Void){
+        // ------ Latest result API -----------
+        let API_URL = "https://apiv2.allsportsapi.com/\(sport_type)/?met=Livescore&APIkey=a10943e74d5f6b5225e523a43ddd99c7e3b3678d96a2091c93189206a81c6a34"
+        
+        AF.request(API_URL)
+            .responseJSON { res in
+                do
+                {
+                    guard let responseData = res.data else {return}
+                    let res = try JSONDecoder().decode(LatestRes.self, from: responseData)
+                    complition(res)
+                    
+                }catch let error {
+                    complition(nil)
+                    print(error.localizedDescription)
+                    
+                }
+            }
+    }
+    
+    
+    
     }
 
