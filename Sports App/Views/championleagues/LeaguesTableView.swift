@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class LeaguesTableView: UITableViewController {
 
+    var sport:String?
+    var leage_name : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -16,28 +20,96 @@ class LeaguesTableView: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        guard let sport_type = sport else{return}
+        
+        print(sport_type )
+        
+        switch(sport_type)
+        {
+        case "Football" :
+            Football.fetchFootballLeages {  data in
+                
+                for i in 0..<(data?.result.count ?? 0){
+                    self.leage_name.append(data?.result[i].league_name ?? "")
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
+        case "Basketball","Tennis" :
+            var sport = sport_type
+            if sport_type == "Basketball"
+            {
+                sport = "basketball"
+            }else{
+                sport = "tennis"}
+            TennisOrBasketball.fetchSportsLeages(sport_type: sport) {  data in
+                
+                for i in 0..<(data?.result.count ?? 0){
+                    self.leage_name.append(data?.result[i].league_name ?? "")
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
+        case "Cricket" :
+            Cricket.fetchCricketLeages{  data in
+                
+                for i in 0..<(data?.result.count ?? 0){
+                    self.leage_name.append(data?.result[i].league_name ?? "")
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
+        default:
+            print("no data")
+        }
+        
+        
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return leage_name.count
     }
-    /*
+   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableCell
 
+        
+        cell.leage_label.text = leage_name[indexPath.row]
+        
         // Configure the cell...
 
         return cell
     }
-    */
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let leagues_desc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesDescription") as!LeaguesDescription
+        
+      
+        leagues_desc.sportType = sport
+        
+        leagues_desc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(leagues_desc, animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.

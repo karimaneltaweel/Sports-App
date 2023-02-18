@@ -50,5 +50,13 @@ class SportsView: UIViewController ,UICollectionViewDataSource,UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 1, left: 5, bottom: 1, right: 5)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var leaguesTableView = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesTableView") as! LeaguesTableView
+        leaguesTableView.sport = sportsNames[indexPath.row]
+        
+        leaguesTableView.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(leaguesTableView, animated: true)
+    }
 
 }

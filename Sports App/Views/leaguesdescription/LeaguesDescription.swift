@@ -9,6 +9,8 @@ import UIKit
 
 class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   
+    var sportType :String?
+    
     @IBOutlet weak var upComming: UICollectionView!
     @IBOutlet weak var latestResult: UICollectionView!
     @IBOutlet weak var teams: UICollectionView!
@@ -16,6 +18,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
       
+        print("leagueDesc"+(sportType ?? ""))
         
     }
     

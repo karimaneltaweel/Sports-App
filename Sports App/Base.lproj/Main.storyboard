@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CAg-UG-7ue">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lqt-zH-L5m">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -154,20 +154,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.2117646933" green="0.2117646933" blue="0.1979144877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="hWy-BT-VKw" customClass="LeaguesTableCell" customModule="Sports_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="393" height="46.333332061767578"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="72" id="hWy-BT-VKw" customClass="LeaguesTableCell" customModule="Sports_App" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hWy-BT-VKw" id="dmS-Bi-BHK">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="46.333332061767578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="72"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQy-Xy-Qqa">
-                                            <rect key="frame" x="20" y="10.999999999999998" width="353" height="24.333333333333329"/>
+                                            <rect key="frame" x="20" y="11" width="353" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.8940840364" green="0.42294073100000001" blue="0.1842020154" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="fQy-Xy-Qqa" secondAttribute="bottom" id="4Re-iV-i8Z"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fQy-Xy-Qqa" secondAttribute="trailing" id="Pbl-Sy-FYo"/>
@@ -175,7 +176,10 @@
                                         <constraint firstItem="fQy-Xy-Qqa" firstAttribute="leading" secondItem="dmS-Bi-BHK" secondAttribute="leadingMargin" id="sQW-yE-QNI"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                <color key="backgroundColor" red="0.20995759959999999" green="0.2097965181" blue="0.1953225136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="leage_label" destination="fQy-Xy-Qqa" id="yaC-iZ-nIt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -191,7 +195,7 @@
         <!--Leagues Description-->
         <scene sceneID="R6w-Sh-YFI">
             <objects>
-                <viewController id="qWI-zs-gso" customClass="LeaguesDescription" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaguesDescription" id="qWI-zs-gso" customClass="LeaguesDescription" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="saH-1i-FgG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -610,8 +614,8 @@
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="sicon" width="32" height="32"/>
         <image name="timg" width="612" height="408"/>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
