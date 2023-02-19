@@ -9,7 +9,8 @@ import UIKit
 import Kingfisher
 class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   
-    var upcommingEvents = [Event]()
+//    var upcommingEvents = [Event]()
+    var events :UpComingEvents?
     var sportType :String?
     
     @IBOutlet weak var upComming: UICollectionView!
@@ -38,14 +39,16 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         
         ApiService.fetchUpComming(sport_type: sportType ?? "") { data in
         
-            if let events = data?.result {
-                self.upcommingEvents = events
-              
-            }
+            self.events = data
+//            if let events = data?.result {
+//                self.upcommingEvents = events
+//
+//            }
             
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
                                     self.upComming.reloadData()
+                                    self.teams.reloadData()
                                         self.upComming.alpha = 1
                                         fadeView.removeFromSuperview()
                                         self.activityView.stopAnimating()
@@ -83,16 +86,16 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (collectionView == upComming){
+        if (collectionView == upComming || collectionView == teams){
             
-            return upcommingEvents.count
-            
+//            return upcommingEvents.count
+            return events?.result.count ?? 0
         }
-        if (collectionView == latestResult){
-
-            return 20
-            
-        }
+//        if (collectionView == latestResult){
+//
+//            return 20
+//
+//        }
         
         return 20
     }
@@ -119,40 +122,42 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
             
             switch(sportType){
             case "football" :
-                cell.team1Label.text =  upcommingEvents[indexPath.row].event_home_team
+                cell.team1Label.text =  events?.result[indexPath.row].event_home_team
             
-                cell.team2Label.text = upcommingEvents[indexPath.row].event_away_team
-                cell.team1Img.kf.setImage(with: URL(string:upcommingEvents[indexPath.row].home_team_logo ?? ""))
-                print("p1 img : "+(upcommingEvents[indexPath.row].event_home_team_logo ?? ""))
+                cell.team2Label.text = events?.result[indexPath.row].event_away_team
+                
+                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].home_team_logo ?? ""))
+                
+//                print("p1 img : "+(events?.result[indexPath.row].event_home_team_logo ?? ""))
 
-                cell.team2Img.kf.setImage(with: URL(string: upcommingEvents[indexPath.row].away_team_logo ?? ""))
-                cell.date.text = upcommingEvents[indexPath.row].event_date
+                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""))
+                cell.date.text = events?.result[indexPath.row].event_date
                 
             case "tennis" :
-                cell.team1Label.text =  upcommingEvents[indexPath.row].event_first_player
+                cell.team1Label.text =  events?.result[indexPath.row].event_first_player
             
-                cell.team2Label.text = upcommingEvents[indexPath.row].event_second_player
-                cell.team1Img.kf.setImage(with: URL(string:upcommingEvents[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
-                cell.team2Img.kf.setImage(with: URL(string: upcommingEvents[indexPath.row].event_second_player_logo ?? ""),placeholder: UIImage(named: "player2"))
-                cell.date.text = upcommingEvents[indexPath.row].event_date
+                cell.team2Label.text = events?.result[indexPath.row].event_second_player
+                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
+                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_second_player_logo ?? ""),placeholder: UIImage(named: "player2"))
+                cell.date.text = events?.result[indexPath.row].event_date
                 
             case "basketball":
-                cell.team1Label.text =  upcommingEvents[indexPath.row].event_home_team
-                cell.team2Label.text = upcommingEvents[indexPath.row].event_away_team
+                cell.team1Label.text =  events?.result[indexPath.row].event_home_team
+                cell.team2Label.text = events?.result[indexPath.row].event_away_team
                 
-                cell.team1Img.kf.setImage(with: URL(string:upcommingEvents[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "holder1"))
-                cell.team2Img.kf.setImage(with: URL(string: upcommingEvents[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "league"))
+                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "holder1"))
+                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "league"))
                 
-                cell.date.text = upcommingEvents[indexPath.row].event_date
+                cell.date.text = events?.result[indexPath.row].event_date
                 
             case "cricket":
                 
-                cell.team1Label.text =  upcommingEvents[indexPath.row].event_home_team
-                cell.team2Label.text = upcommingEvents[indexPath.row].event_away_team
-                cell.team1Img.kf.setImage(with: URL(string:upcommingEvents[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "cricket1"))
+                cell.team1Label.text =  events?.result[indexPath.row].event_home_team
+                cell.team2Label.text = events?.result[indexPath.row].event_away_team
+                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "cricket1"))
     
-                cell.team2Img.kf.setImage(with: URL(string: upcommingEvents[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "cricket2"))
-                cell.date.text = upcommingEvents[indexPath.row].event_date_start
+                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "cricket2"))
+                cell.date.text = events?.result[indexPath.row].event_date_start
             default:
                print("no type")
             }
@@ -161,7 +166,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
             
         }
         //------------- latest result collection --------------
-        if (collectionView == latestResult){
+         if (collectionView == latestResult){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latestresult", for: indexPath) as! LatestResultItem
             cell.team2Label.text = "real"
             cell.team1Label.text = "ahly"
@@ -174,18 +179,23 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         // -------------- Teams collection ------------
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teams", for: indexPath) as! TeamsItem
-//        switch(sportType){
-//        case "football":
-//            cell.teamsImage.kf.setImage(with: URL(string:upcommingEvents[indexPath.row].home_team_logo ?? ""))
-//        case "tennis":
-//            cell.teamsImage.kf.setImage(with: URL(string:upcommingEvents[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "placeholder"))
-//
-//        default :
-//            cell.teamsImage.kf.setImage(with: URL(string:upcommingEvents[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "placeholder"))
-//
-//        }
-//
-//
+        print(sportType ?? "")
+        print(events?.result.count)
+        switch(sportType)
+        {
+        case "football":
+            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].home_team_logo ?? ""))
+        case "tennis":
+            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
+        case "basketball":
+            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "placeholder"))
+
+        default :
+            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "cricketPH"))
+
+        }
+
+
 //        cell.teamsImage.image = UIImage(named: "placeholder")
         return cell
     }
