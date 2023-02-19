@@ -193,8 +193,6 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         // -------------- Teams collection ------------
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teams", for: indexPath) as! TeamsItem
-        print(sportType ?? "")
-        print(events?.result.count)
         switch(sportType)
         {
         case "football":
@@ -210,8 +208,18 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         }
 
 
-//        cell.teamsImage.image = UIImage(named: "placeholder")
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == teams
+        {
+            var teamsDeatailsVC = self.storyboard?.instantiateViewController(withIdentifier: "TeamsDetailsView") as! TeamsDetailsView
+            
+            teamsDeatailsVC.team_key = events?.result[indexPath.row].home_team_key
+            teamsDeatailsVC.sporttype = sportType
+            
+            self.navigationController?.pushViewController(teamsDeatailsVC, animated: true)
+        }
     }
     
     

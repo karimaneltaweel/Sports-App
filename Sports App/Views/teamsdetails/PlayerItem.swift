@@ -10,16 +10,25 @@ import UIKit
 class PlayerItem: UICollectionViewCell {
     
     
-    @IBOutlet weak var player_img: UIImageView!
+    @IBOutlet weak var PlayerImage: UIImageView!
+    
+    @IBOutlet weak var Playername: UILabel!
+    
+    @IBOutlet weak var playerAge: UILabel!
+    
+    @IBOutlet weak var playerPosition: UILabel!
+    
+    @IBOutlet weak var playerNumber: UILabel!
     
     override func layoutSublayers(of layer: CALayer) {
+        
         super.layoutSubviews()
-        self.player_img.layer.cornerRadius = player_img.frame.size.width/2
-        self.player_img.layer.cornerRadius = player_img.frame.size.height/2
-
-//        self.layer.cornerRadius = self.frame.size.width/2.0
-        self.player_img.clipsToBounds = true
-        self.layer.shadowColor = UIColor.white.cgColor
-        self.layer.shadowRadius = 0.5
+        self.PlayerImage.layer.cornerRadius = PlayerImage.frame.size.width/2.0
+        self.playerPosition.clipsToBounds = true
+        
+        contentView.layer.cornerRadius = 20
+        contentView.layer.masksToBounds = true
+        }
+        
     }
-}
+

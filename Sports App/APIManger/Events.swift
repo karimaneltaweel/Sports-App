@@ -25,7 +25,7 @@ class Event: Decodable{
     var event_second_player : String?
     var event_first_player_logo : String?
     var event_second_player_logo : String?
-    
+    var home_team_key:Int?
 }
 
 class UpComingEvents: Decodable{

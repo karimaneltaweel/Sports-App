@@ -14,6 +14,7 @@
 		8C8F353929A1405D001A0628 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8F353829A1405D001A0628 /* ApiService.swift */; };
 		8C98353B29A040BB00388C1C /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C98353A29A040BB00388C1C /* Events.swift */; };
 		8CBC71B329A18F59002E4787 /* LatestRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBC71B229A18F59002E4787 /* LatestRes.swift */; };
+		DD2EAF8529A2BFCB00AAAC8B /* TeamDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2EAF8429A2BFCB00AAAC8B /* TeamDetails.swift */; };
 		DD4E3FF6299E632200731BAB /* LeaguesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E3FF5299E632200731BAB /* LeaguesTableView.swift */; };
 		DD4E3FF8299E648200731BAB /* LeaguesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E3FF7299E648200731BAB /* LeaguesTableCell.swift */; };
 		DD4E3FFA299E685B00731BAB /* LeaguesDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4E3FF9299E685B00731BAB /* LeaguesDescription.swift */; };
@@ -37,6 +38,7 @@
 		8C8F353829A1405D001A0628 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		8C98353A29A040BB00388C1C /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		8CBC71B229A18F59002E4787 /* LatestRes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestRes.swift; sourceTree = "<group>"; };
+		DD2EAF8429A2BFCB00AAAC8B /* TeamDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetails.swift; sourceTree = "<group>"; };
 		DD4E3FF5299E632200731BAB /* LeaguesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesTableView.swift; sourceTree = "<group>"; };
 		DD4E3FF7299E648200731BAB /* LeaguesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesTableCell.swift; sourceTree = "<group>"; };
 		DD4E3FF9299E685B00731BAB /* LeaguesDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesDescription.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				8C98353A29A040BB00388C1C /* Events.swift */,
 				8C8F353829A1405D001A0628 /* ApiService.swift */,
 				8CBC71B229A18F59002E4787 /* LatestRes.swift */,
+				DD2EAF8429A2BFCB00AAAC8B /* TeamDetails.swift */,
 			);
 			path = APIManger;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				DD4E3FFC299E71D300731BAB /* TeamsDetailsView.swift in Sources */,
 				DD9A51C7299E84E4006C694E /* TeamsItem.swift in Sources */,
 				DD5E6BF3299D12E700C8A73D /* AppDelegate.swift in Sources */,
+				DD2EAF8529A2BFCB00AAAC8B /* TeamDetails.swift in Sources */,
 				DD5E6BFD299D12E700C8A73D /* Sports_App.xcdatamodeld in Sources */,
 				DD5E6BF5299D12E700C8A73D /* SceneDelegate.swift in Sources */,
 				DD4E3FF8299E648200731BAB /* LeaguesTableCell.swift in Sources */,
