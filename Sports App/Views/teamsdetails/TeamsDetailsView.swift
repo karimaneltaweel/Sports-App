@@ -24,18 +24,19 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         print(team_key)
+        print(sporttype)
         
         ApiService.fetchTeamDetails(sport_type: sporttype ?? "", team_key: team_key ?? 0) { data in
             self.details = data
             DispatchQueue.main.async{
 //                self.playersCollection.reloadData()
                 
-                self.teamImage.kf.setImage(with: URL(string:self.details?.result[0].team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
+                self.teamImage.kf.setImage(with: URL(string:self.details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
                 self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
                         self.teamImage.clipsToBounds = true
                 
-                self.Coach.text = self.details?.result[0].coaches[0].coach_name
-                self.teamName.text = self.details?.result[0].team_name
+                self.Coach.text = self.details?.result.first?.coaches.first?.coach_name
+                self.teamName.text = self.details?.result.first?.team_name
                 self.playersCollection.reloadData()
                 
             }
@@ -71,7 +72,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width/2.15, height: self.view.frame.height * 0.42)
+        return CGSize(width: UIScreen.main.bounds.width/2.065, height: self.view.frame.height * 0.42)
     }
     /*
     // MARK: - Navigation

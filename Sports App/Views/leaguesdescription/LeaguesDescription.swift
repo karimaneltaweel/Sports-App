@@ -59,12 +59,13 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         ApiService.fetchLatestRes(sport_type: self.sportType ?? "") { data in
             self.latestEvents = data
             DispatchQueue.main.async{
-                UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
-                    self.latestResult.reloadData()
-                    self.latestResult.alpha = 1
-                    fadeView.removeFromSuperview()
-                    self.activityView.stopAnimating()
-                }, completion: nil)
+                self.latestResult.reloadData()
+//                UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+//
+//                    self.latestResult.alpha = 1
+//                    fadeView.removeFromSuperview()
+//                    self.activityView.stopAnimating()
+//                }, completion: nil)
                 
             }
         }
@@ -100,9 +101,14 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
  
             return events?.result.count ?? 0
         }
+        if sportType == "cricket"
+        {
+            return events?.result.count ?? 0
+        }
+            
+            return latestEvents?.result.count ?? 0
         
-        return latestEvents?.result.count ?? 0
-    }
+        }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if (collectionView == upComming){
@@ -179,7 +185,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
                  // get it from the same api of upcomming abd teams as it not found in latest res api
                  cell.team1Label.text = events?.result[indexPath.row].event_home_team
                  cell.team2Label.text = events?.result[indexPath.row].event_away_team
-                 //cell.scoreLabel.text = events?.result[indexPath.row]
+                 cell.scoreLabel.text = events?.result[indexPath.row].event_away_final_result
              default :
                  cell.team1Label.text = latestEvents?.result[indexPath.row].event_home_team
                  cell.team2Label.text = latestEvents?.result[indexPath.row].event_away_team

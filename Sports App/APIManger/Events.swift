@@ -20,6 +20,7 @@ class Event: Decodable{
     
     // cricket date
     var event_date_start : String?
+    var event_away_final_result : String?
     //tennis
     var event_first_player : String?
     var event_second_player : String?
