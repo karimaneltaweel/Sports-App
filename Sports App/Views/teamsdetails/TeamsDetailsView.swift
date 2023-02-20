@@ -21,35 +21,42 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     var details:TeamDetails?
     
     @IBOutlet weak var playersCollection: UICollectionView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print(team_key)
         print(sporttype)
         
         ApiService.fetchTeamDetails(sport_type: sporttype ?? "", team_key: team_key ?? 0) { data in
             self.details = data
             DispatchQueue.main.async{
-//                self.playersCollection.reloadData()
                 
                 self.teamImage.kf.setImage(with: URL(string:self.details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
                 self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
-                        self.teamImage.clipsToBounds = true
+                self.teamImage.clipsToBounds = true
                 
                 self.Coach.text = self.details?.result.first?.coaches.first?.coach_name
                 self.teamName.text = self.details?.result.first?.team_name
                 self.playersCollection.reloadData()
                 
             }
+            
+            print(self.details?.result[0].team_name)
+            print(self.Coach.text = self.details?.result[0].coaches[0].coach_name)
+            
         }
-        
-        
-
-        
-        
+   
     }
+    
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return details?.result[0].players.count ?? 0
     }
@@ -71,17 +78,10 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
         
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width/2.065, height: self.view.frame.height * 0.42)
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

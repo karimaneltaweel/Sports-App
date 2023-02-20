@@ -9,7 +9,8 @@ import UIKit
 import Kingfisher
 class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   
-
+    @IBOutlet weak var TeamsLabelGui: UILabel!
+    
     var events :UpComingEvents?
     var latestEvents: LatestRes?
     var sportType :String?
@@ -23,9 +24,9 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        let fadeView:UIView = UIView()
+                    let fadeView:UIView = UIView()
                     fadeView.frame = self.view.frame
-                fadeView.backgroundColor = UIColor.white
+                  fadeView.backgroundColor = UIColor.white
                     fadeView.alpha = 0.4
 
                     self.view.addSubview(fadeView)
@@ -38,12 +39,21 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         
        changeSportTypeName()
         
+        if sportType == "tennis"
+        {
+            TeamsLabelGui.text = "Players"
+        }
+        else{
+            TeamsLabelGui.text = "Teams"
+        }
         
         
             
         ApiService.fetchUpComming(sport_type: self.sportType ?? "") {  data in
             self.events = data
             DispatchQueue.main.async{
+                self.latestResult.reloadData()
+
                 UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
                     self.upComming.reloadData()
                     self.teams.reloadData()
@@ -59,13 +69,9 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         ApiService.fetchLatestRes(sport_type: self.sportType ?? "") { data in
             self.latestEvents = data
             DispatchQueue.main.async{
+                
                 self.latestResult.reloadData()
-//                UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
-//
-//                    self.latestResult.alpha = 1
-//                    fadeView.removeFromSuperview()
-//                    self.activityView.stopAnimating()
-//                }, completion: nil)
+
                 
             }
         }
@@ -108,7 +114,15 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
             
             return latestEvents?.result.count ?? 0
         
+        if sportType == "cricket"{
+            
+            return events?.result.count ?? 0
         }
+       
+            return latestEvents?.result.count ?? 0
+            
+
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if (collectionView == upComming){
@@ -219,12 +233,18 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == teams
         {
-            var teamsDeatailsVC = self.storyboard?.instantiateViewController(withIdentifier: "TeamsDetailsView") as! TeamsDetailsView
-            
-            teamsDeatailsVC.team_key = events?.result[indexPath.row].home_team_key
-            teamsDeatailsVC.sporttype = sportType
-            
-            self.navigationController?.pushViewController(teamsDeatailsVC, animated: true)
+            if sportType == "tennis"{
+                
+                print("tennis")
+            }
+            else{
+                
+                let teamsDeatailsVC = self.storyboard?.instantiateViewController(withIdentifier: "TeamsDetailsView") as! TeamsDetailsView
+                
+                teamsDeatailsVC.team_key = events?.result[indexPath.row].home_team_key
+                teamsDeatailsVC.sporttype = sportType
+                
+                self.navigationController?.pushViewController(teamsDeatailsVC, animated: true)}
         }
     }
     
