@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
    
     
@@ -16,13 +17,30 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     
     @IBOutlet weak var Coach: UILabel!
     
+    @IBOutlet weak var favorite_btn: UIButton!
     var team_key:Int?
     var sporttype:String?
     var details:TeamDetails?
+    var fav1 :UIButton.Configuration?
+    var fav2 :UIButton.Configuration?
+    
     
     @IBOutlet weak var playersCollection: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fav1 = UIButton.Configuration.plain()
+        fav1?.buttonSize = .large
+        fav1?.cornerStyle = .medium
+        fav1?.image = UIImage(systemName: "heart")
+        
+        fav2 = UIButton.Configuration.plain()
+        fav2?.buttonSize = .large
+        fav2?.cornerStyle = .medium
+        fav2?.image = UIImage(systemName: "heart.fill")
+        
+        
+        
         print(team_key)
         print(sporttype)
         
@@ -41,12 +59,13 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
                 
             }
         }
-        
-        
-
-        
-        
     }
+    
+   
+    
+    
+    
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -67,8 +86,21 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
         
     }
     
+    fileprivate func updateUI() {
+        if (favorite_btn.configuration?.image == UIImage(systemName: "heart")){
+            favorite_btn.configuration = fav2
+            print("saved")
+            CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "")
+        }
+        else if(favorite_btn.configuration?.image == UIImage(systemName: "heart.fill")){
+            favorite_btn.configuration = fav1
+
+//            CoreDataManager.deleteFromCoreData(team_name: details?.result.first?.team_name ?? "")
+        }
+    }
+    
     @IBAction func favAction(_ sender: Any) {
-        
+        updateUI()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -12,7 +12,7 @@
         <!--Favorites-->
         <scene sceneID="wE9-se-oJi">
             <objects>
-                <viewController id="fng-bK-nf9" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavTeamTableVC" id="fng-bK-nf9" customClass="FavTeamTableVC" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C3V-Ee-cAC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="710"/>
                                 <color key="backgroundColor" red="0.2117646933" green="0.2117646933" blue="0.1979144877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" textLabel="fTp-tf-vhT" detailTextLabel="hqr-6L-CbQ" style="IBUITableViewCellStyleSubtitle" id="Bd5-8b-Wvs">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" textLabel="fTp-tf-vhT" style="IBUITableViewCellStyleDefault" id="Bd5-8b-Wvs">
                                         <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bd5-8b-Wvs" id="fsd-p0-pE0">
@@ -29,14 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fTp-tf-vhT">
-                                                    <rect key="frame" x="20" y="6.0000000000000009" width="25" height="14.333333333333334"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hqr-6L-CbQ">
-                                                    <rect key="frame" x="19.999999999999996" y="22.333333333333336" width="43.666666666666664" height="14.333333333333334"/>
+                                                    <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                                     <nil key="textColor"/>
@@ -46,6 +39,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="fng-bK-nf9" id="tRp-lZ-1tb"/>
+                                    <outlet property="delegate" destination="fng-bK-nf9" id="6y1-At-cb4"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oSW-NC-mXu"/>
@@ -58,6 +55,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" image="fav" id="XV5-WS-V3r"/>
+                    <connections>
+                        <outlet property="table_v" destination="JiA-zc-128" id="mbS-Jz-aEV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3T-Sd-vvk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -617,9 +617,10 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vui-qP-6Ac">
                                 <rect key="frame" x="342" y="59" width="50.666666666666686" height="34.333333333333343"/>
+                                <color key="tintColor" red="0.95895344019999995" green="0.38510143759999999" blue="0.052238732580000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="heart.fill" catalog="system">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
+                                    <color key="baseForegroundColor" red="0.95895344019999995" green="0.38510143759999999" blue="0.052238732580000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="favAction:" destination="CAg-UG-7ue" eventType="touchUpInside" id="rTY-y2-dge"/>
@@ -660,6 +661,7 @@
                     </view>
                     <connections>
                         <outlet property="Coach" destination="AQq-sd-6y9" id="Q5v-cI-VUr"/>
+                        <outlet property="favorite_btn" destination="vui-qP-6Ac" id="HiJ-SF-Kbf"/>
                         <outlet property="playersCollection" destination="z4Z-7H-Pye" id="1am-Qv-NnS"/>
                         <outlet property="teamImage" destination="k4F-vR-zQB" id="HkL-HC-xXm"/>
                         <outlet property="teamName" destination="ILI-1d-3K4" id="aeK-MD-JoS"/>
@@ -714,7 +716,7 @@
         <image name="cimg" width="612" height="408"/>
         <image name="fav" width="32" height="32"/>
         <image name="fimg" width="960" height="640"/>
-        <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="sicon" width="32" height="32"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
