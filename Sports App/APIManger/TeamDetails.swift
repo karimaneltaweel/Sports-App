@@ -31,12 +31,12 @@ class TeamDetails: Decodable{
 }
 
 
-//class TeamCK:Decodable{
-//    var success:Int?
-//    var result:[TeamResult]
-//}
-//class TeamResult:Decodable{
-//    var team_name: String?
-//    var team_logo: String?
-//    var team_key: Int?
-//}
+class TeamCK:Decodable{
+    var success:Int?
+    var result:[TeamResult]
+}
+class TeamResult:Decodable{
+    var team_name: String?
+    var team_logo: String?
+    var team_key: Int?
+}

@@ -110,6 +110,8 @@ class CoreDataManager
         }
     }
     
+    
+    
     static func fetchFromCoreData() ->[FavoriteTeam]
     {
         appDelegate = UIApplication.shared.delegate as? AppDelegate

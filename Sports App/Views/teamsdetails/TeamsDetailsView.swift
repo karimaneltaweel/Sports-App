@@ -8,8 +8,12 @@
 import UIKit
 import Kingfisher
 import CoreData
-class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
-    
+
+protocol RenderTableView
+{
+    func renderTableView()
+}
+class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     var keyFav = ""
     var keyNotFav = ""
     
@@ -26,6 +30,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     var team_key:Int?
     var sporttype:String?
     var details:TeamDetails?
+    var team_details :TeamCK?
     
     var fav1 :UIButton.Configuration?
     var fav2 :UIButton.Configuration?
@@ -37,48 +42,56 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         //----------call----userdefault----function----to---check---buttonstate--------
-        //        fav1 = UIButton.Configuration.plain()
-        //        fav1?.buttonSize = .large
-        //        fav1?.cornerStyle = .medium
-        //        fav1?.image = UIImage(systemName: "heart")
-        //
-        //        fav2 = UIButton.Configuration.plain()
-        //        fav2?.buttonSize = .large
-        //        fav2?.cornerStyle = .medium
-        //        fav2?.image = UIImage(systemName: "heart.fill")
-        //
-        
-        
-        //        print(team_key)
-        //        print(sporttype)
-        
         //-----------fetch-------------data-----from Api---using----teamKey---------
-        ApiService.fetchTeamDetails(sport_type: sporttype ?? "", team_key: team_key ?? 0) { data in
-            self.details = data
-            DispatchQueue.main.async{
+        switch sporttype
+        {
+        case "basketball","cricket" :
+            ApiService.fetchFromApi(team_key: team_key ?? 0, sport_type: sporttype ?? "") { [self] (response : TeamCK?) in
+                team_details = response
+
+                DispatchQueue.main.async {
+                    self.teamImage.kf.setImage(with: URL(string:self.team_details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
+                    self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
+                    self.teamImage.clipsToBounds = true
+
+                    self.Coach.text = " "
+                    self.teamName.text = self.team_details?.result.first?.team_name
+//                    self.playersCollection.reloadData()
+                }
+            }
+
+        default :
+            ApiService.fetchTeamDetails(sport_type: sporttype ?? "", team_key: team_key ?? 0) { data in
+                self.details = data
+                DispatchQueue.main.async{
+                    
+                    self.keyFav = "\(self.team_key)"
+                    self.keyNotFav = "\(self.team_key)"
+                    print(self.keyFav)
+                    print(self.keyNotFav)
+                    if UserDefaults.standard.bool(forKey: self.keyFav){
+                        self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                        print("add fav")
+                    }else if UserDefaults.standard.bool(forKey: self.keyNotFav){
+                        self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+                        print("not fav")
+                    }
+                    
+                    self.teamImage.kf.setImage(with: URL(string:self.details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
+                    self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
+                    self.teamImage.clipsToBounds = true
+
+                    self.Coach.text = self.details?.result.first?.coaches.first?.coach_name
+                    self.teamName.text = self.details?.result.first?.team_name
+                    self.playersCollection.reloadData()
+                    
                 
-                self.keyFav = "\(self.team_key)"
-                self.keyNotFav = "\(self.team_key)"
-                print(self.keyFav)
-                print(self.keyNotFav)
-                if UserDefaults.standard.bool(forKey: self.keyFav){
-                    self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                    print("add fav")
-                }else if UserDefaults.standard.bool(forKey: self.keyNotFav){
-                    self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-                    print("not fav")
                 }
                 
-                self.teamImage.kf.setImage(with: URL(string:self.details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
-                self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
-                self.teamImage.clipsToBounds = true
-                
-                self.Coach.text = self.details?.result.first?.coaches.first?.coach_name
-                self.teamName.text = self.details?.result.first?.team_name
-                self.playersCollection.reloadData()
             }
-            
         }
+        
+        
    
     }
     
@@ -122,6 +135,8 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             print("saved")
             
             CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "")
+            
+            
             
             UserDefaults.standard.set(false, forKey: keyNotFav)
             UserDefaults.standard.set(true, forKey: keyFav)

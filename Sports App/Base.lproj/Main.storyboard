@@ -54,7 +54,7 @@
                             <constraint firstItem="JiA-zc-128" firstAttribute="trailing" secondItem="oSW-NC-mXu" secondAttribute="trailing" id="Vlp-T3-qqN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="fav" id="XV5-WS-V3r"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Favorites" image="fav" id="XV5-WS-V3r"/>
                     <connections>
                         <outlet property="table_v" destination="JiA-zc-128" id="mbS-Jz-aEV"/>
                     </connections>
@@ -697,7 +697,7 @@
         <scene sceneID="cHQ-DS-hv4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="up0-EL-cpw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sports" image="sicon" id="f8F-19-zJh"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Sports" image="sicon" id="f8F-19-zJh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MsZ-gb-9wZ">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
