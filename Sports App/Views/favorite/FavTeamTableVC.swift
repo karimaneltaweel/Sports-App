@@ -12,13 +12,8 @@ import Kingfisher
 
 class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDelegate{
     
-    
-    
-    
-    
     var favoriteTeams : [FavoriteTeam] = []
-    
-    
+
     @IBOutlet weak var table_v: UITableView!
     
     override func viewDidLoad() {
@@ -26,8 +21,7 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
 
         print("view Did load")
         
-        
-//        table_v.reloadData()
+ 
     }
     
     override func viewWillAppear(_ animated: Bool) {

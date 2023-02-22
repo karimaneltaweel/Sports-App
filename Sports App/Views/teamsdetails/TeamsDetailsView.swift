@@ -136,10 +136,11 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             
             CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "")
             
-            
-            
             UserDefaults.standard.set(false, forKey: keyNotFav)
             UserDefaults.standard.set(true, forKey: keyFav)
+            
+            showToast(message: "\(details?.result.first?.team_name!) added to favourite successfully )", seconds: 7.0)
+            
             
         } else{
             favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -151,17 +152,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             UserDefaults.standard.set(false, forKey: keyFav)
             UserDefaults.standard.set(true, forKey: keyNotFav)
             print("I am not selected.")
-            
-            //        if (favorite_btn.configuration?.image == UIImage(systemName: "heart")){
-            //            favorite_btn.configuration = fav2
-            //            print("saved")
-            //            CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "")
-            //        }
-            //        else if(favorite_btn.configuration?.image == UIImage(systemName: "heart.fill")){
-            //            favorite_btn.configuration = fav1
-            //
-            //            CoreDataManager.deleteFromCoreData(team_name: details?.result.first?.team_name ?? "")
-            //        }
+        
         }}
     
     @IBAction func favAction(_ sender: Any) {
@@ -173,5 +164,15 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
         return CGSize(width: UIScreen.main.bounds.width/2.065, height: self.view.frame.height * 0.42)
     }
 
+    func showToast(message : String, seconds: Double){
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        alert.view.backgroundColor = .red
+            //alert.view.alpha = 0.5
+            alert.view.layer.cornerRadius = 15
+            self.present(alert, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
+                alert.dismiss(animated: true)
+            }
+        }
 
 }

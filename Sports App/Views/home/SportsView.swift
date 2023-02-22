@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Reachability
 class SportsView: UIViewController ,UICollectionViewDataSource,UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     let sportsNames = ["Football","Basketball","Cricket","Tennis"]
     let Sportsimage = ["fimg","bimg","cimg","timg"]
@@ -52,11 +52,32 @@ class SportsView: UIViewController ,UICollectionViewDataSource,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var leaguesTableView = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesTableView") as! LeaguesTableView
-        leaguesTableView.sport = sportsNames[indexPath.row]
+        let reachability = try! Reachability()
+        switch reachability.connection {
+          case .wifi:
+              print("Reachable via WiFi")
+            var leaguesTableView = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesTableView") as! LeaguesTableView
+            leaguesTableView.sport = sportsNames[indexPath.row]
+            
+            leaguesTableView.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(leaguesTableView, animated: true)
+            
+          case .cellular:
+              print("Reachable via Cellular")
+          case .unavailable:
+            print("Network not reachable")
+            showAlert()
+        case .none:
+            print("nothing!")
+        }
+       
+    }
+    
+    func showAlert(){
+        let alert = UIAlertController(title: "Worning", message: "You are currently offline, check your connection!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true)
         
-        leaguesTableView.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(leaguesTableView, animated: true)
     }
 
 }
