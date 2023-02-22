@@ -13,6 +13,8 @@ class LeaguesTableView: UITableViewController {
 
     var sport:String?
     var leage_name : [String] = []
+    var leage_key : [Int] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +39,8 @@ class LeaguesTableView: UITableViewController {
         ApiService.fetchLeagues(sport_type: sport ?? "football") { data in
             for i in 0..<(data?.result.count ?? 0){
                 self.leage_name.append(data?.result[i].league_name ?? "")
+                self.leage_key.append(data?.result[i].league_key ?? 0)
+
             }
 
             DispatchQueue.main.async {
@@ -93,6 +97,7 @@ class LeaguesTableView: UITableViewController {
         
       
         leagues_desc.sportType = sport
+        leagues_desc.legKey = leage_key[indexPath.row]
         
         leagues_desc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(leagues_desc, animated: true)

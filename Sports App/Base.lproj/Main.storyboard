@@ -457,6 +457,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="TeamsLabelGui" destination="Nr1-hN-Uhq" id="9PX-Bz-Zqf"/>
                         <outlet property="latestResult" destination="cCb-PH-0qT" id="zdC-VM-vGD"/>
                         <outlet property="teams" destination="WMc-1E-qHJ" id="XdN-6T-oBm"/>
                         <outlet property="upComming" destination="cUl-oQ-5eM" id="xHc-5d-wpF"/>

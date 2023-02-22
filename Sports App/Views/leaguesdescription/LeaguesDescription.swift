@@ -14,6 +14,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     var events :UpComingEvents?
     var latestEvents: LatestRes?
     var sportType :String?
+    var legKey:Int?
     
     @IBOutlet weak var upComming: UICollectionView!
     @IBOutlet weak var latestResult: UICollectionView!
@@ -49,7 +50,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         
         
             
-        ApiService.fetchUpComming(sport_type: self.sportType ?? "") {  data in
+        ApiService.fetchUpComming(sport_type: self.sportType ?? "",legKey: legKey ?? 0) {  data in
             self.events = data
             DispatchQueue.main.async{
                 self.latestResult.reloadData()
