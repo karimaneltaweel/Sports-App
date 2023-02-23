@@ -16,7 +16,9 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
     var leage_name : [String] = []
     var leage_key : [Int] = []
     var leage_image : [String] = []
-    
+    var Count : Int?
+    var events :UpComingEvents?
+
     var filteredNames : [String] = []
     var searchController: UISearchController!
 
@@ -44,9 +46,11 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
             }
         }
         
-
+    
         
     }
+    
+     
 
     func changeSportTypeName(){
         switch(sport){
@@ -102,14 +106,36 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let leagues_desc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesDescription") as!LeaguesDescription
+
+
+            leagues_desc.sportType = sport
+            leagues_desc.legKey = leage_key[indexPath.row]
+
+            leagues_desc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(leagues_desc, animated: true)
         
-      
-        leagues_desc.sportType = sport
-        leagues_desc.legKey = leage_key[indexPath.row]
-        
-        leagues_desc.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(leagues_desc, animated: true)
+//        ApiService.fetchUpComming(sport_type: self.sport ?? "",legKey: leage_key[indexPath.row] ?? 0) {  data in
+//            self.events = data
+//            self.Count = self.events?.result.count
+//            print(self.events?.success)
+//        }
+//
+//        if self.events?.success = nil {
+//            showAlert()
+//        }else{
+//
+//            let leagues_desc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesDescription") as!LeaguesDescription
+//
+//
+//            leagues_desc.sportType = sport
+//            leagues_desc.legKey = leage_key[indexPath.row]
+//
+//            leagues_desc.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(leagues_desc, animated: true)
+//        }
+//
     }
 
     func updateSearchResults(for searchController: UISearchController) {
@@ -129,6 +155,13 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
             leage_name = filteredNames
             tableView.reloadData()
         }
+    }
+    
+    func showAlert(){
+        let alert = UIAlertController(title: "attention", message: "There is no events today", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert, animated: true)
+        
     }
 
 }

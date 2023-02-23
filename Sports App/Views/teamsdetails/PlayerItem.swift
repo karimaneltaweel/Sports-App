@@ -25,10 +25,16 @@ class PlayerItem: UICollectionViewCell {
         super.layoutSubviews()
         self.PlayerImage.layer.cornerRadius = PlayerImage.frame.size.width/2.0
         self.playerPosition.clipsToBounds = true
-        
+    
         contentView.layer.cornerRadius = 20
         contentView.layer.masksToBounds = true
+        
+        self.layer.borderWidth = 4.0
+        self.layer.borderColor = UIColor.orange.cgColor
+
+        
         }
+     
         
     }
 

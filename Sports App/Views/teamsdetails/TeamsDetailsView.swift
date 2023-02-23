@@ -17,6 +17,8 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     var keyFav = ""
     var keyNotFav = ""
     
+    @IBOutlet weak var coachLabel: UILabel!
+    
     @IBOutlet weak var teamImage: UIImageView!
     
     @IBOutlet weak var teamName: UILabel!
@@ -31,18 +33,24 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     var sporttype:String?
     var details:TeamDetails?
     var team_details :TeamCK?
+
     
-    var fav1 :UIButton.Configuration?
-    var fav2 :UIButton.Configuration?
-    
+    let activityView = UIActivityIndicatorView(style: .large)
+
     
     @IBOutlet weak var playersCollection: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if sporttype == "football"{
+            coachLabel.text = "Coach"
+        }else{
+            coachLabel.text = ""
+        }
         //----------call----userdefault----function----to---check---buttonstate--------
         //-----------fetch-------------data-----from Api---using----teamKey---------
+        //--------------check---------buttonState------------------------
         switch sporttype
         {
         case "basketball","cricket" :
@@ -56,7 +64,6 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
 
                     self.Coach.text = " "
                     self.teamName.text = self.team_details?.result.first?.team_name
-//                    self.playersCollection.reloadData()
                 }
             }
 
@@ -139,7 +146,10 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             UserDefaults.standard.set(false, forKey: keyNotFav)
             UserDefaults.standard.set(true, forKey: keyFav)
             
-            showToast(message: "\(details?.result.first?.team_name!) added to favourite successfully )", seconds: 7.0)
+            guard let name = details?.result.first?.team_name else{
+                return
+            }
+            showToast(message: "\(name) added to favourite successfully )", seconds: 7.0)
             
             
         } else{
@@ -165,9 +175,9 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     }
 
     func showToast(message : String, seconds: Double){
+        
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
-        alert.view.backgroundColor = .red
-            //alert.view.alpha = 0.5
+            alert.view.backgroundColor = .red
             alert.view.layer.cornerRadius = 15
             self.present(alert, animated: true)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
@@ -175,4 +185,6 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             }
         }
 
+
 }
+

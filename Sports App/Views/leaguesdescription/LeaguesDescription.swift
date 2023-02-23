@@ -38,7 +38,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         
                     let fadeView:UIView = UIView()
                     fadeView.frame = self.view.frame
-                  fadeView.backgroundColor = UIColor.white
+                    fadeView.backgroundColor = UIColor.white
                     fadeView.alpha = 0.4
 
                     self.view.addSubview(fadeView)
@@ -162,7 +162,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
             
                 cell.team2Label.text = events?.result[indexPath.row].event_away_team
                 
-                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].home_team_logo ?? ""))
+                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].home_team_logo ?? ""),placeholder: UIImage(named: ""))
  
                 cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""))
                 cell.date.text = events?.result[indexPath.row].event_date
@@ -208,22 +208,22 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
                  cell.team1Label.text = latestEvents?.result[indexPath.row].event_first_player
                  cell.team2Label.text = latestEvents?.result[indexPath.row].event_second_player
                  cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
-                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_first_player_logo ?? ""))
-                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_second_player_logo ?? ""))
+                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
+                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_second_player_logo ?? ""),placeholder: UIImage(named: "player2"))
                  
              case "cricket":
                  // get it from the same api of upcomming abd teams as it not found in latest res api
                  cell.team1Label.text = events?.result[indexPath.row].event_home_team
                  cell.team2Label.text = events?.result[indexPath.row].event_away_team
                  cell.scoreLabel.text = events?.result[indexPath.row].event_away_final_result
-                 cell.team1img.kf.setImage(with: URL(string: events?.result[indexPath.row].home_team_logo ?? ""))
-                 cell.team2img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""))
+                 cell.team1img.kf.setImage(with: URL(string: events?.result[indexPath.row].home_team_logo ?? ""),placeholder: UIImage(named: "cricket1"))
+                 cell.team2img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""),placeholder: UIImage(named: "cricket2"))
              default :
                  cell.team1Label.text = latestEvents?.result[indexPath.row].event_home_team
                  cell.team2Label.text = latestEvents?.result[indexPath.row].event_away_team
                  cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
-                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].home_team_logo ?? ""))
-                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].away_team_logo ?? ""))
+                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].home_team_logo ?? ""),placeholder:UIImage(named:"holder1") )
+                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].away_team_logo ?? ""),placeholder: UIImage(named:"league"))
              }
             
             return cell
