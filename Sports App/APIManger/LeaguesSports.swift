@@ -9,6 +9,7 @@ import Foundation
 class LeagueItem : Decodable{
     var league_key:Int?
     var league_name:String?
+    var league_logo:String?
 }
 
 class LeagueSport : Decodable {

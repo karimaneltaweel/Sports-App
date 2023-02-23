@@ -15,6 +15,7 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
     var sport:String?
     var leage_name : [String] = []
     var leage_key : [Int] = []
+    var leage_image : [String] = []
     
     var filteredNames : [String] = []
     var searchController: UISearchController!
@@ -33,6 +34,7 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
                 self.leage_name.append(data?.result[i].league_name ?? "")
                 self.leage_key.append(data?.result[i].league_key ?? 0)
 
+                self.leage_image.append(data?.result[i].league_logo ?? "")
             }
 
             
@@ -90,13 +92,13 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
 
         
         cell.leage_label.text = leage_name[indexPath.row]
-        
+        cell.leage_image.kf.setImage(with: URL(string: leage_image[indexPath.row]),placeholder: UIImage(named: "teamHolder"))
         // Configure the cell...
 
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 120
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

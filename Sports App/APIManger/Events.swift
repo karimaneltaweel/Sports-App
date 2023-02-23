@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 class Event: Decodable{
     var event_date : String?
+    var event_time : String?
     //basketball cricket
     var event_home_team: String?
     var event_away_team: String?

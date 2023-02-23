@@ -14,6 +14,7 @@ class LeaguesTableCell: UITableViewCell {
     @IBOutlet weak var leage_label: UILabel!
     
     
+    @IBOutlet weak var leage_image: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,15 @@ class LeaguesTableCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        // -----leage_image-----
+        leage_image.layer.cornerRadius = leage_image.frame.size.width/2
+        leage_image.layer.cornerRadius = leage_image.frame.size.height/2
+
+
+        leage_image.clipsToBounds = true
+        
+        
+        
         contentView.layer.cornerRadius = 20
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
     }

@@ -11,6 +11,10 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
   
     @IBOutlet weak var TeamsLabelGui: UILabel!
     
+    @IBOutlet weak var latest_resultlabel: UILabel!
+    
+    @IBOutlet weak var upcoming_label: UILabel!
+    
     var events :UpComingEvents?
     var latestEvents: LatestRes?
     var sportType :String?
@@ -25,6 +29,13 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        TeamsLabelGui.layer.cornerRadius = 15
+        TeamsLabelGui.clipsToBounds = true
+        latest_resultlabel.layer.cornerRadius = 15
+        latest_resultlabel.clipsToBounds = true
+        upcoming_label.layer.cornerRadius = 15
+        upcoming_label.clipsToBounds = true
+        
                     let fadeView:UIView = UIView()
                     fadeView.frame = self.view.frame
                   fadeView.backgroundColor = UIColor.white
@@ -155,10 +166,11 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
  
                 cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""))
                 cell.date.text = events?.result[indexPath.row].event_date
+                cell.timeLabel.text = events?.result[indexPath.row].event_time
                 
             case "tennis" :
                 cell.team1Label.text =  events?.result[indexPath.row].event_first_player
-            
+                cell.timeLabel.text = events?.result[indexPath.row].event_time
                 cell.team2Label.text = events?.result[indexPath.row].event_second_player
                 cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
                 cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_second_player_logo ?? ""),placeholder: UIImage(named: "player2"))
@@ -167,7 +179,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
             case "basketball":
                 cell.team1Label.text =  events?.result[indexPath.row].event_home_team
                 cell.team2Label.text = events?.result[indexPath.row].event_away_team
-                
+                cell.timeLabel.text = events?.result[indexPath.row].event_time
                 cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "holder1"))
                 cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "league"))
                 
@@ -178,7 +190,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
                 cell.team1Label.text =  events?.result[indexPath.row].event_home_team
                 cell.team2Label.text = events?.result[indexPath.row].event_away_team
                 cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "cricket1"))
-    
+                cell.timeLabel.text = events?.result[indexPath.row].event_time
                 cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "cricket2"))
                 cell.date.text = events?.result[indexPath.row].event_date_start
             default:
@@ -196,15 +208,22 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
                  cell.team1Label.text = latestEvents?.result[indexPath.row].event_first_player
                  cell.team2Label.text = latestEvents?.result[indexPath.row].event_second_player
                  cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
+                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_first_player_logo ?? ""))
+                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_second_player_logo ?? ""))
+                 
              case "cricket":
                  // get it from the same api of upcomming abd teams as it not found in latest res api
                  cell.team1Label.text = events?.result[indexPath.row].event_home_team
                  cell.team2Label.text = events?.result[indexPath.row].event_away_team
                  cell.scoreLabel.text = events?.result[indexPath.row].event_away_final_result
+                 cell.team1img.kf.setImage(with: URL(string: events?.result[indexPath.row].home_team_logo ?? ""))
+                 cell.team2img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""))
              default :
                  cell.team1Label.text = latestEvents?.result[indexPath.row].event_home_team
                  cell.team2Label.text = latestEvents?.result[indexPath.row].event_away_team
                  cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
+                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].home_team_logo ?? ""))
+                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].away_team_logo ?? ""))
              }
             
             return cell

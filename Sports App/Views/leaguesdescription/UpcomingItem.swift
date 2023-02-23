@@ -14,6 +14,7 @@ class UpcomingItem: UICollectionViewCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var team1Label: UILabel!
     @IBOutlet weak var team2Label: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     override func layoutSublayers(of layer: CALayer) {
             super.layoutSublayers(of: layer)
