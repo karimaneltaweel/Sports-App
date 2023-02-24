@@ -59,10 +59,12 @@ class OnBoardingView: UIViewController,UICollectionViewDelegate,UICollectionView
 
         }else{
             
+            currentpagee += 1
+
+            
             let indexpath = IndexPath(item: currentpagee, section:0)
             SliderCollection.scrollToItem(at: indexpath, at:.centeredHorizontally, animated: true)
 
-            currentpagee += 1
 
         }
         

@@ -12,6 +12,7 @@ import Kingfisher
 
 class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDelegate{
     
+    @IBOutlet weak var table_v: UITableView!
     var favoriteTeams : [FavoriteTeam] = []
 
     
@@ -26,7 +27,7 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
     override func viewWillAppear(_ animated: Bool) {
         print("will Appear")
         favoriteTeams = CoreDataManager.fetchFromCoreData()
-//        table_v.reloadData()
+        table_v.reloadData()
     }
     
     
@@ -75,9 +76,9 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
             print("ok clicked")
             CoreDataManager.deleteFromCoreData(team_name: favoriteTeams[indexPath.row].team_name ?? "")
             favoriteTeams.remove(at: indexPath.row)
-//            table_v.deleteRows(at: [indexPath], with: .fade)
+            table_v.deleteRows(at: [indexPath], with: .fade)
             
-//                    table_v.reloadData()
+                    table_v.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel , handler: { action in
