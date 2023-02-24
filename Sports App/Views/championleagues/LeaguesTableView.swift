@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 
-class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
+class LeaguesTableView: UITableViewController ,UISearchResultsUpdating, UISearchBarDelegate{
    
 
     var sport:String?
@@ -20,11 +20,19 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
     var events :UpComingEvents?
 
     var filteredNames : [String] = []
-    var searchController: UISearchController!
+    //var searchController: UISearchController!
+    let searchController = UISearchController(searchResultsController: nil)
+
+    var isSearchBarEmpty: Bool{
+            return searchController.searchBar.text!.isEmpty
+        }
+    var isFiltering : Bool{
+            return searchController.isActive && !isSearchBarEmpty
+        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         initializeSearcBar()
         guard let sport_type = sport else{return}
         
@@ -68,15 +76,16 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
     }
     
     func initializeSearcBar(){
-        
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        
-        searchController.dimsBackgroundDuringPresentation = false
 
-        searchController.searchBar.sizeToFit()
-        tableView.tableHeaderView = searchController.searchBar
-        definesPresentationContext = true
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.tintColor = .white
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Task"
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+
+        textFieldInsideSearchBar?.textColor = .white
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
                 
     }
     // MARK: - Table view data source
@@ -87,20 +96,32 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return leage_name.count
-    }
-   
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableCell
+           if isFiltering {
+               return filteredNames.count
+           }
+           return leage_name.count
+       }
+      
+       override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableCell
+           
+           let leagName : String
+           
+           if isFiltering {
+               leagName = filteredNames[indexPath.row]
+               
+           }else{
+               leagName = leage_name[indexPath.row]
+           }
+            
+           cell.leage_label.text = leagName
+           cell.leage_image.kf.setImage(with: URL(string: leage_image[indexPath.row]),placeholder: UIImage(named: "teamHolder"))
 
-        
-        cell.leage_label.text = leage_name[indexPath.row]
-        cell.leage_image.kf.setImage(with: URL(string: leage_image[indexPath.row]),placeholder: UIImage(named: "teamHolder"))
-        // Configure the cell...
-
-        return cell
-    }
+           return cell
+       }
+    
+    
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
@@ -116,47 +137,30 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating{
             leagues_desc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(leagues_desc, animated: true)
         
-//        ApiService.fetchUpComming(sport_type: self.sport ?? "",legKey: leage_key[indexPath.row] ?? 0) {  data in
-//            self.events = data
-//            self.Count = self.events?.result.count
-//            print(self.events?.success)
-//        }
-//
-//        if self.events?.success = nil {
-//            showAlert()
-//        }else{
-//
-//            let leagues_desc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesDescription") as!LeaguesDescription
-//
-//
-//            leagues_desc.sportType = sport
-//            leagues_desc.legKey = leage_key[indexPath.row]
-//
-//            leagues_desc.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(leagues_desc, animated: true)
-//        }
-//
+
     }
+    // Helper Function
+    func filterContentForSearchText(_ searchText : String, category : String? = nil){
+        filteredNames = leage_name.filter{
+            return $0.lowercased().contains(searchText.lowercased())
+        }
+        tableView.reloadData()
+    }
+
 
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text{
             
-//            if  searchText.isEmpty {
-//                filteredNames = leage_name
-//            }else{
-//                var predicate = NSPredicate(format: "leage_name CONTAINS[c] \(searchText)")
-//                leage_name.predicate = predicate
-//
-//            }
-           filteredNames = searchText.isEmpty ? leage_name :  leage_name.filter({ (name: String)-> Bool in
-                return name.range(of: searchText,options: .caseInsensitive) != nil
-            })
-            print(searchText)
-            leage_name = filteredNames
-            tableView.reloadData()
+            //           filteredNames = searchText.isEmpty ? leage_name :  leage_name.filter({ (name: String)-> Bool in
+            //                return name.range(of: searchText,options: .caseInsensitive) != nil
+            //            })
+            //            print(searchText)
+            //            leage_name = filteredNames
+            //            tableView.reloadData()
+            //        }
+            filterContentForSearchText(searchController.searchBar.text!)
         }
     }
-    
     func showAlert(){
         let alert = UIAlertController(title: "attention", message: "There is no events today", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
