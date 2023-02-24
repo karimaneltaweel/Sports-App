@@ -79,5 +79,7 @@ class SportsView: UIViewController ,UICollectionViewDataSource,UICollectionViewD
         self.present(alert, animated: true)
         
     }
-
+   
+    
+   
 }

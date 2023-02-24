@@ -27,6 +27,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
     let activityView = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
+        print(legKey)
         super.viewDidLoad()
     
         TeamsLabelGui.layer.cornerRadius = 15
