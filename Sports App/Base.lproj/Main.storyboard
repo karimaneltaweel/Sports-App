@@ -738,10 +738,10 @@
             </objects>
             <point key="canvasLocation" x="3796.1832061068699" y="-569.0140845070423"/>
         </scene>
-        <!--Onboarding View-->
+        <!--On Boarding View-->
         <scene sceneID="rIc-x3-Rjz">
             <objects>
-                <viewController id="Xhy-UL-qoA" customClass="OnboardingView" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xhy-UL-qoA" customClass="OnBoardingView" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zbT-oO-Pln">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -756,7 +756,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="onitem" id="xKP-Af-OoW" customClass="OnboardingCell" customModule="Sports_App" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="boardingItem" id="xKP-Af-OoW" customClass="OnBoardingCell" customModule="Sports_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="-2.6666666666666665" width="390" height="586"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rXP-bb-w7f">
@@ -805,9 +805,9 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="390" height="586"/>
                                         <connections>
-                                            <outlet property="slideDescription" destination="YdL-kZ-73o" id="erp-ch-14M"/>
-                                            <outlet property="slideImage" destination="X9Q-I2-bxo" id="Fzo-EQ-kjE"/>
-                                            <outlet property="slideTitle" destination="ERE-LR-dNZ" id="iuF-Ia-G3e"/>
+                                            <outlet property="descriptionSlide" destination="YdL-kZ-73o" id="gWn-Q2-ApM"/>
+                                            <outlet property="imageSlide" destination="X9Q-I2-bxo" id="hJd-dA-AyV"/>
+                                            <outlet property="titleSlide" destination="ERE-LR-dNZ" id="BFi-Jg-jx1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -835,7 +835,7 @@
                                     <color key="baseBackgroundColor" red="0.8940840364" green="0.42294073100000001" blue="0.1842020154" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="nextButton:" destination="Xhy-UL-qoA" eventType="touchUpInside" id="M1m-hR-SVi"/>
+                                    <action selector="sliderButton:" destination="Xhy-UL-qoA" eventType="touchUpInside" id="UbM-hm-juQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -854,9 +854,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Yuw-Dx-eUm"/>
                     <connections>
-                        <outlet property="NextOutlet" destination="E8a-zc-hzu" id="HY5-Ru-oec"/>
-                        <outlet property="pageSlider" destination="wJv-jd-3cG" id="Jgo-pE-MP7"/>
-                        <outlet property="splashCollection" destination="sGu-TS-sv1" id="Qaq-Iv-7wo"/>
+                        <outlet property="SliderCollection" destination="sGu-TS-sv1" id="bJU-RY-FVg"/>
+                        <outlet property="buttonOutlet" destination="E8a-zc-hzu" id="go9-Na-emX"/>
+                        <outlet property="pageSlider" destination="wJv-jd-3cG" id="lsx-bi-Jpe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A04-TD-GuV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
