@@ -20,7 +20,6 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating, UISearch
     var events :UpComingEvents?
 
     var filteredNames : [String] = []
-    //var searchController: UISearchController!
     let searchController = UISearchController(searchResultsController: nil)
 
     var isSearchBarEmpty: Bool{
@@ -82,10 +81,10 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating, UISearch
         searchController.searchResultsUpdater = self
         searchController.searchBar.tintColor = .white
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Task"
+        searchController.searchBar.placeholder = "Search LeageName"
         let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
-
         textFieldInsideSearchBar?.textColor = .white
+        searchController.searchBar.barStyle = .black
         navigationItem.searchController = searchController
         definesPresentationContext = false
                 
@@ -152,14 +151,7 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating, UISearch
 
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text{
-            
-            //           filteredNames = searchText.isEmpty ? leage_name :  leage_name.filter({ (name: String)-> Bool in
-            //                return name.range(of: searchText,options: .caseInsensitive) != nil
-            //            })
-            //            print(searchText)
-            //            leage_name = filteredNames
-            //            tableView.reloadData()
-            //        }
+ 
             filterContentForSearchText(searchController.searchBar.text!)
         }
     }
