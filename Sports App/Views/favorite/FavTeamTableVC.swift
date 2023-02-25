@@ -74,9 +74,12 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
         //AddAction
         alert.addAction(UIAlertAction(title: "OK", style: .default , handler: { [self] action in
             print("ok clicked")
+            guard let key = favoriteTeams[indexPath.row].team_key else
+            { return  }
+            UserDefaults.standard.set(false, forKey:"\(key)")
+
             CoreDataManager.deleteFromCoreData(team_name: favoriteTeams[indexPath.row].team_name ?? "")
 
-            UserDefaults.standard.set(false, forKey:"\(favoriteTeams[indexPath.row].team_key)")
             print(favoriteTeams[indexPath.row].team_key)
             favoriteTeams.remove(at: indexPath.row)
             table_v.deleteRows(at: [indexPath], with: .fade)
