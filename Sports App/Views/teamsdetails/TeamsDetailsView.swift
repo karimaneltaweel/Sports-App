@@ -48,7 +48,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
         }else{
             coachLabel.text = ""
         }
-        //----------call----userdefault----function----to---check---buttonstate--------
+        
         //-----------fetch-------------data-----from Api---using----teamKey---------
         //--------------check---------buttonState------------------------
         
@@ -61,6 +61,10 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
                 team_details = response
 
                 DispatchQueue.main.async {
+                    //-----------fetch-----user---defaults---------
+
+                    self.fetchUserDefault(teamkeyy: self.team_key ?? 0)
+
                     self.teamImage.kf.setImage(with: URL(string:self.team_details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
                     self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
                     self.teamImage.clipsToBounds = true
@@ -74,17 +78,8 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             ApiService.fetchFromApi(API_URL: API_URL) { data,dictionary in
                 self.details = data
                 DispatchQueue.main.async{
-                    
-                    self.favKey = "\(self.team_key ?? 0)"
-                    print(self.favKey)
-                    if UserDefaults.standard.bool(forKey: self.favKey){
-                        self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                        print("add fav")
-                        
-                    }else{
-                           self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-                           print("not fav")
-                    }
+                    //-----------fetch-----user---defaults---------
+                    self.fetchUserDefault(teamkeyy: self.team_key ?? 0)
                     
                     self.teamImage.kf.setImage(with: URL(string:self.details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
                     self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
@@ -133,16 +128,27 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     }
     
     fileprivate func updateUI() {
-         
+        
         favorite_btn.isSelected =  UserDefaults.standard.bool(forKey: self.favKey)
-
         
         favorite_btn.isSelected = !favorite_btn.isSelected
+        
+        
         if favorite_btn.isSelected {
             
             favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "",team_key: team_key ?? 0)
-            UserDefaults.standard.set(true, forKey: "\(favKey)")
+            
+            if sporttype == "football"{
+                
+                isSelectedButton(teamname: details?.result.first?.team_name ?? "", teamlogo: details?.result.first?.team_logo ?? "", key: team_key ?? 0)
+    
+            }
+            
+            else{
+                
+                isSelectedButton(teamname: team_details?.result.first?.team_name ?? "", teamlogo: team_details?.result.first?.team_logo ?? "", key: team_key ?? 0)
+            
+            }
             
             
             guard let name = details?.result.first?.team_name else{
@@ -152,13 +158,21 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             showToast(message: "\(name) added to favourite successfully )", seconds: 1.0)
             
         }
+        
         else{
             
             favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-            CoreDataManager.deleteFromCoreData(team_name: details?.result.first?.team_name ?? "")
-            UserDefaults.standard.set(false, forKey:  "\(favKey)")
-
-        
+            
+            if sporttype == "football"{
+                
+                unSelectedButton(teamname: details?.result.first?.team_name ?? "", key: team_key ?? 0)
+                
+            }
+            else{
+                
+                unSelectedButton(teamname: team_details?.result.first?.team_name ?? "", key: team_key ?? 0)
+            }
+            
         }}
     
     @IBAction func favAction(_ sender: Any) {
@@ -169,7 +183,9 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width/2.065, height: self.view.frame.height * 0.42)
     }
-
+    
+///////--------------------------------------------------------------------------------FUNCTIONS-------------------------------------------------------
+   //--------------toast------------function------------
     func showToast(message : String, seconds: Double){
         
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
@@ -181,6 +197,32 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             }
         }
 
+    //----------------check------button------state
+    func fetchUserDefault(teamkeyy:Int){
+        
+        if UserDefaults.standard.bool(forKey: self.favKey){
+            self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            
+        }else{
+               self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
+    }
+    //--------------when--------button------isselected---------
+    func isSelectedButton(teamname:String,teamlogo:String,key:Int){
+        
+        CoreDataManager.saveToCoreData(team_name: teamname, team_logo: teamlogo,team_key: key)
+        UserDefaults.standard.set(true, forKey: "\(key)")
+    }
+    
+    //--------------when--------button------is unselected---------
+
+    func unSelectedButton(teamname:String,key:Int){
+        
+        CoreDataManager.deleteFromCoreData(team_name: teamname)
+        UserDefaults.standard.set(false, forKey:  "\(key)")
+        
+    }
 
 }
 
