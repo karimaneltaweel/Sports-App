@@ -20,23 +20,47 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JiA-zc-128">
                                 <rect key="frame" x="0.0" y="59" width="393" height="710"/>
                                 <color key="backgroundColor" red="0.2117646933" green="0.2117646933" blue="0.1979144877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexBackgroundColor" red="0.15807771679999999" green="0.15807771679999999" blue="0.15807771679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" textLabel="fTp-tf-vhT" style="IBUITableViewCellStyleDefault" id="Bd5-8b-Wvs">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" rowHeight="112" id="Bd5-8b-Wvs" customClass="FavoriteViewCell" customModule="Sports_App" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bd5-8b-Wvs" id="fsd-p0-pE0">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="112"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fTp-tf-vhT">
-                                                    <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AdY-4z-sab">
+                                                    <rect key="frame" x="12" y="11" width="116" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="116" id="hio-UM-f7y"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acw-aJ-JHU">
+                                                    <rect key="frame" x="167" y="39" width="193" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Xto-Mf-Y25"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.7602482438" green="0.7602482438" blue="0.76024830340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="AdY-4z-sab" firstAttribute="centerY" secondItem="fsd-p0-pE0" secondAttribute="centerY" id="1Kq-Nw-KuO"/>
+                                                <constraint firstAttribute="trailing" secondItem="acw-aJ-JHU" secondAttribute="trailing" constant="33" id="45t-2E-6la"/>
+                                                <constraint firstItem="acw-aJ-JHU" firstAttribute="centerY" secondItem="AdY-4z-sab" secondAttribute="centerY" id="6UE-uo-o3z"/>
+                                                <constraint firstItem="AdY-4z-sab" firstAttribute="leading" secondItem="fsd-p0-pE0" secondAttribute="leading" constant="12" id="Kcs-nC-k4G"/>
+                                                <constraint firstItem="acw-aJ-JHU" firstAttribute="leading" secondItem="AdY-4z-sab" secondAttribute="trailing" constant="39" id="mfA-wv-u0W"/>
+                                                <constraint firstItem="AdY-4z-sab" firstAttribute="top" secondItem="fsd-p0-pE0" secondAttribute="topMargin" id="x63-ep-9mj"/>
+                                                <constraint firstItem="acw-aJ-JHU" firstAttribute="top" secondItem="fsd-p0-pE0" secondAttribute="top" constant="39" id="xo7-DW-PjV"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.18668913840000001" green="0.1865786314" blue="0.17675003410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="fav_img" destination="AdY-4z-sab" id="NV0-L7-qoJ"/>
+                                            <outlet property="fav_label" destination="acw-aJ-JHU" id="Lk3-6d-XUi"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -287,6 +311,7 @@
                                                 <constraint firstItem="IF5-7T-1Ga" firstAttribute="top" secondItem="Fyf-jU-SW3" secondAttribute="top" constant="30" id="vnV-LK-S0x"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" systemColor="labelColor"/>
                                         <size key="customSize" width="386" height="145"/>
                                         <connections>
                                             <outlet property="date" destination="IF5-7T-1Ga" id="5Jb-T8-yhx"/>
@@ -433,6 +458,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="YTF-4r-fle" secondAttribute="trailing" constant="8" id="spm-fo-ryP"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" systemColor="labelColor"/>
                                         <size key="customSize" width="393" height="167"/>
                                         <connections>
                                             <outlet property="scoreLabel" destination="Rud-jX-NFG" id="efk-Ng-Wbs"/>
@@ -648,6 +674,7 @@
                                                 <constraint firstItem="INx-m0-y3H" firstAttribute="centerY" secondItem="hOS-9X-il8" secondAttribute="centerY" id="z5M-FZ-vdh"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" red="0.58766138550000002" green="0.31478014589999997" blue="0.14638870949999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="customSize" width="187" height="338"/>
                                         <connections>
                                             <outlet property="PlayerImage" destination="4e9-Wt-Yw4" id="b51-2w-OOm"/>
@@ -784,6 +811,9 @@
         <image name="fimg" width="960" height="640"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="sicon" width="32" height="32"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

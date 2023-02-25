@@ -41,29 +41,24 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavoriteViewCell
         cell.layer.cornerRadius = 15
-        cell.textLabel?.text = favoriteTeams[indexPath.row].team_name
+        cell.fav_label.text = favoriteTeams[indexPath.row].team_name
         
         let url = URL(string: favoriteTeams[indexPath.row].team_logo ?? "")
-        cell.imageView?.kf.setImage(with: url)
+        cell.fav_img.kf.setImage(with: url)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 120
     }
     
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-//            showAlert(indexPath: indexPath)
-            CoreDataManager.deleteFromCoreData(team_name: favoriteTeams[indexPath.row].team_name ?? "")
-            favoriteTeams.remove(at: indexPath.row)
-            table_v.deleteRows(at: [indexPath], with: .fade)
-            
-                    table_v.reloadData()
+            showAlert(indexPath: indexPath)
         }
 
     }
@@ -79,11 +74,11 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
         //AddAction
         alert.addAction(UIAlertAction(title: "OK", style: .default , handler: { [self] action in
             print("ok clicked")
-            
-            favoriteTeams.remove(at: indexPath.row)
             CoreDataManager.deleteFromCoreData(team_name: favoriteTeams[indexPath.row].team_name ?? "")
+            favoriteTeams.remove(at: indexPath.row)
             table_v.deleteRows(at: [indexPath], with: .fade)
-            table_v.reloadData()
+            
+                    table_v.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel , handler: { action in

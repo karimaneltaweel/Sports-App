@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		070F76B129A032140096D185 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 070F76B029A032140096D185 /* Alamofire */; };
 		073159B8299F10A5002EA3A4 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073159B7299F10A5002EA3A4 /* PlayerItem.swift */; };
+		075C219729A97E2900032CA5 /* FavoriteViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075C219629A97E2900032CA5 /* FavoriteViewCell.swift */; };
 		079DD3C029A6C29A000FDF7E /* API_Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079DD3BF29A6C29A000FDF7E /* API_Constants.swift */; };
 		07EE39A029A41C87002CBA69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE399F29A41C87002CBA69 /* CoreDataManager.swift */; };
 		07EE39A229A43274002CBA69 /* FavoriteTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE39A129A43274002CBA69 /* FavoriteTeam.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		073159B7299F10A5002EA3A4 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
+		075C219629A97E2900032CA5 /* FavoriteViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewCell.swift; sourceTree = "<group>"; };
 		079DD3BF29A6C29A000FDF7E /* API_Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_Constants.swift; sourceTree = "<group>"; };
 		07EE399F29A41C87002CBA69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		07EE39A129A43274002CBA69 /* FavoriteTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTeam.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				07EE39A629A436EC002CBA69 /* FavTeamTableVC.swift */,
+				075C219629A97E2900032CA5 /* FavoriteViewCell.swift */,
 			);
 			path = favorite;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				DD5E6C0E299D264900C8A73D /* SportsView.swift in Sources */,
 				07EE39A029A41C87002CBA69 /* CoreDataManager.swift in Sources */,
 				8C8F353629A13FF4001A0628 /* LeaguesSports.swift in Sources */,
+				075C219729A97E2900032CA5 /* FavoriteViewCell.swift in Sources */,
 				DD4E3FFC299E71D300731BAB /* TeamsDetailsView.swift in Sources */,
 				DD9A51C7299E84E4006C694E /* TeamsItem.swift in Sources */,
 				DD5E6BF3299D12E700C8A73D /* AppDelegate.swift in Sources */,

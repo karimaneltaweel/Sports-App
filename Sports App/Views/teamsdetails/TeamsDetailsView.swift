@@ -141,7 +141,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             
             print("saved")
             
-            CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "")
+            CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "",team_key: team_key ?? 0)
             
             UserDefaults.standard.set(false, forKey: keyNotFav)
             UserDefaults.standard.set(true, forKey: keyFav)
@@ -149,7 +149,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             guard let name = details?.result.first?.team_name else{
                 return
             }
-            showToast(message: "\(name) added to favourite successfully )", seconds: 7.0)
+            showToast(message: "\(name) added to favourite successfully )", seconds: 1.0)
             
             
         } else{
