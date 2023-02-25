@@ -14,8 +14,7 @@ protocol RenderTableView
     func renderTableView()
 }
 class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
-    var keyFav = ""
-    var keyNotFav = ""
+    var favKey = ""
     
     @IBOutlet weak var coachLabel: UILabel!
     
@@ -43,6 +42,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if sporttype == "football"{
             coachLabel.text = "Coach"
         }else{
@@ -72,16 +72,15 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
                 self.details = data
                 DispatchQueue.main.async{
                     
-                    self.keyFav = "\(self.team_key)"
-                    self.keyNotFav = "\(self.team_key)"
-                    print(self.keyFav)
-                    print(self.keyNotFav)
-                    if UserDefaults.standard.bool(forKey: self.keyFav){
+                    self.favKey = "\(self.team_key ?? 0)"
+                    print(self.favKey)
+                    if UserDefaults.standard.bool(forKey: self.favKey){
                         self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
                         print("add fav")
-                    }else if UserDefaults.standard.bool(forKey: self.keyNotFav){
-                        self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-                        print("not fav")
+                        
+                    }else{
+                           self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+                           print("not fav")
                     }
                     
                     self.teamImage.kf.setImage(with: URL(string:self.details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
@@ -136,32 +135,25 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
         favorite_btn.isSelected = !favorite_btn.isSelected
         
         if favorite_btn.isSelected {
-            print("I am selected.")
+            
             favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            
-            print("saved")
-            
             CoreDataManager.saveToCoreData(team_name: details?.result.first?.team_name ?? "", team_logo: details?.result.first?.team_logo ?? "",team_key: team_key ?? 0)
+            UserDefaults.standard.set(true, forKey: "\(favKey)")
             
-            UserDefaults.standard.set(false, forKey: keyNotFav)
-            UserDefaults.standard.set(true, forKey: keyFav)
             
             guard let name = details?.result.first?.team_name else{
                 return
             }
+            
             showToast(message: "\(name) added to favourite successfully )", seconds: 1.0)
             
+        }
+        else{
             
-        } else{
             favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-            
             CoreDataManager.deleteFromCoreData(team_name: details?.result.first?.team_name ?? "")
-            
-            print("deleted")
-            
-            UserDefaults.standard.set(false, forKey: keyFav)
-            UserDefaults.standard.set(true, forKey: keyNotFav)
-            print("I am not selected.")
+            UserDefaults.standard.set(false, forKey:  "\(favKey)")
+
         
         }}
     

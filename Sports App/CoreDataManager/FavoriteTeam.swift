@@ -11,4 +11,6 @@ import Foundation
 struct FavoriteTeam {
     var team_name : String?
     var team_logo : String?
+    var team_key : Int?
+
 }

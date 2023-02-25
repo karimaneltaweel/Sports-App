@@ -236,7 +236,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cUl-oQ-5eM">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cUl-oQ-5eM">
                                 <rect key="frame" x="0.0" y="89" width="393" height="213"/>
                                 <color key="backgroundColor" red="0.2117646933" green="0.2117646933" blue="0.1979144877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5wk-db-E9y">
@@ -329,7 +329,7 @@
                                     <outlet property="delegate" destination="qWI-zs-gso" id="nJl-zP-ssL"/>
                                 </connections>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WMc-1E-qHJ">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WMc-1E-qHJ">
                                 <rect key="frame" x="0.0" y="655" width="393" height="148"/>
                                 <color key="backgroundColor" red="0.2117646933" green="0.2117646933" blue="0.1979144877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WzR-OH-zyw">
@@ -371,7 +371,7 @@
                                     <outlet property="delegate" destination="qWI-zs-gso" id="lYG-Yr-X4e"/>
                                 </connections>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cCb-PH-0qT">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cCb-PH-0qT">
                                 <rect key="frame" x="0.0" y="332" width="393" height="238"/>
                                 <color key="backgroundColor" red="0.20995759959999999" green="0.2097965181" blue="0.1953225136" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4D8-TX-3dw">
@@ -559,7 +559,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z4Z-7H-Pye">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z4Z-7H-Pye">
                                 <rect key="frame" x="0.0" y="245" width="393" height="607"/>
                                 <color key="backgroundColor" red="0.16771703960000001" green="0.16755086180000001" blue="0.15247210859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -754,7 +754,7 @@
                     </view>
                     <connections>
                         <outlet property="Coach" destination="AQq-sd-6y9" id="Q5v-cI-VUr"/>
-                        <outlet property="CoachLabel" destination="05d-XD-Tke" id="1Ru-uw-UNZ"/>
+                        <outlet property="coachLabel" destination="05d-XD-Tke" id="eAA-ej-w3U"/>
                         <outlet property="favorite_btn" destination="vui-qP-6Ac" id="HiJ-SF-Kbf"/>
                         <outlet property="playersCollection" destination="z4Z-7H-Pye" id="1am-Qv-NnS"/>
                         <outlet property="teamImage" destination="k4F-vR-zQB" id="HkL-HC-xXm"/>

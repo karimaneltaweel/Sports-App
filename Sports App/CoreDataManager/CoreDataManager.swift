@@ -136,8 +136,9 @@ class CoreDataManager
             {
                 var team_name = item.value(forKey: "teamName")
                 var team_logo = item.value(forKey: "teamLogo")
-                
-                var team = FavoriteTeam(team_name: team_name as? String ,team_logo: team_logo as? String)
+                var team_key = item.value(forKey: "teamKey")
+
+                var team = FavoriteTeam(team_name: team_name as? String ,team_logo: team_logo as? String,team_key: team_key as? Int)
                 
                 arrayOfFavTeam.append(team)
             }
