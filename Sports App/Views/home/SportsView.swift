@@ -15,6 +15,7 @@ class SportsView: UIViewController ,UICollectionViewDataSource,UICollectionViewD
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
     
+        self.tabBarController?.navigationItem.hidesBackButton = true
 
     }
     

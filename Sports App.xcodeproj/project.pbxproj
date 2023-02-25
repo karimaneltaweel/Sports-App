@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		070F76B129A032140096D185 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 070F76B029A032140096D185 /* Alamofire */; };
 		073159B8299F10A5002EA3A4 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073159B7299F10A5002EA3A4 /* PlayerItem.swift */; };
-		079DD3C029A6C29A000FDF7E /* API_Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079DD3BF29A6C29A000FDF7E /* API_Constants.swift */; };
 		07C2383F29A99A070027BF2F /* FavViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2383E29A99A070027BF2F /* FavViewCell.swift */; };
 		07EE39A029A41C87002CBA69 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE399F29A41C87002CBA69 /* CoreDataManager.swift */; };
 		07EE39A229A43274002CBA69 /* FavoriteTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE39A129A43274002CBA69 /* FavoriteTeam.swift */; };
@@ -44,8 +43,6 @@
 
 /* Begin PBXFileReference section */
 		073159B7299F10A5002EA3A4 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
-		075C219629A97E2900032CA5 /* FavoriteViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewCell.swift; sourceTree = "<group>"; };
-		079DD3BF29A6C29A000FDF7E /* API_Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_Constants.swift; sourceTree = "<group>"; };
 		07C2383E29A99A070027BF2F /* FavViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavViewCell.swift; sourceTree = "<group>"; };
 		07EE399F29A41C87002CBA69 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		07EE39A129A43274002CBA69 /* FavoriteTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTeam.swift; sourceTree = "<group>"; };
@@ -128,7 +125,6 @@
 				8C8F353829A1405D001A0628 /* ApiService.swift */,
 				8CBC71B229A18F59002E4787 /* LatestRes.swift */,
 				DD2EAF8429A2BFCB00AAAC8B /* TeamDetails.swift */,
-				079DD3BF29A6C29A000FDF7E /* API_Constants.swift */,
 			);
 			path = APIManger;
 			sourceTree = "<group>";
@@ -146,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				07EE39A629A436EC002CBA69 /* FavTeamTableVC.swift */,
-				075C219629A97E2900032CA5 /* FavoriteViewCell.swift */,
 				07C2383E29A99A070027BF2F /* FavViewCell.swift */,
 			);
 			path = favorite;
@@ -337,7 +332,6 @@
 				DD5E6BF3299D12E700C8A73D /* AppDelegate.swift in Sources */,
 				DD2EAF8529A2BFCB00AAAC8B /* TeamDetails.swift in Sources */,
 				DD5E6BFD299D12E700C8A73D /* Sports_App.xcdatamodeld in Sources */,
-				079DD3C029A6C29A000FDF7E /* API_Constants.swift in Sources */,
 				DD5E6BF5299D12E700C8A73D /* SceneDelegate.swift in Sources */,
 				DD4E3FF8299E648200731BAB /* LeaguesTableCell.swift in Sources */,
 				07EE39A229A43274002CBA69 /* FavoriteTeam.swift in Sources */,
