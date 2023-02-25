@@ -34,12 +34,14 @@ class LeaguesTableView: UITableViewController ,UISearchResultsUpdating, UISearch
         super.viewDidLoad()
     
         initializeSearcBar()
+        
+       changeSportTypeName()
+        
         guard let sport_type = sport else{return}
         
         print(sport_type )
-       changeSportTypeName()
-        
-        ApiService.fetchLeagues(sport_type: sport ?? "football") { data in
+        let API_URL = "https://apiv2.allsportsapi.com/\(sport_type)/?met=Leagues&APIkey=a10943e74d5f6b5225e523a43ddd99c7e3b3678d96a2091c93189206a81c6a34"
+        ApiService.fetchFromApi(API_URL: API_URL) { (data : LeagueSport?,dictionary) in
             for i in 0..<(data?.result.count ?? 0){
                 self.leage_name.append(data?.result[i].league_name ?? "")
                 self.leage_key.append(data?.result[i].league_key ?? 0)

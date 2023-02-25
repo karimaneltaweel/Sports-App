@@ -51,10 +51,13 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
         //----------call----userdefault----function----to---check---buttonstate--------
         //-----------fetch-------------data-----from Api---using----teamKey---------
         //--------------check---------buttonState------------------------
+        
+        let API_URL = "https://apiv2.allsportsapi.com/\(sporttype ?? "")/?&met=Teams&teamId=\(team_key ?? 0)&APIkey=a10943e74d5f6b5225e523a43ddd99c7e3b3678d96a2091c93189206a81c6a34"
+        
         switch sporttype
         {
         case "basketball","cricket" :
-            ApiService.fetchFromApi(team_key: team_key ?? 0, sport_type: sporttype ?? "") { [self] (response : TeamCK?) in
+            ApiService.fetchFromApi(API_URL: API_URL) { [self] (response : TeamCK?,dictionary) in
                 team_details = response
 
                 DispatchQueue.main.async {
@@ -68,7 +71,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
             }
 
         default :
-            ApiService.fetchTeamDetails(sport_type: sporttype ?? "", team_key: team_key ?? 0) { data in
+            ApiService.fetchFromApi(API_URL: API_URL) { data,dictionary in
                 self.details = data
                 DispatchQueue.main.async{
                     

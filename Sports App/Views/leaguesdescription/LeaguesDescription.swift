@@ -62,11 +62,23 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         
         
             
-        ApiService.fetchUpComming(sport_type: self.sportType ?? "",legKey: legKey ?? 0) {  data in
+        
+        let API_URL_UPCOMMING = "https://apiv2.allsportsapi.com/\(sportType ?? "")/?met=Fixtures&APIkey=44ec41896869760bf9da8e3b2ccd2ea8bca5c24e0269d0102507eed1e78a3ae1&from=2022-02-19&to=2023-02-20&leagueId=\(legKey ?? 0)"
+        
+        let API_URL_LATESTRES = "https://apiv2.allsportsapi.com/\(sportType ?? "")/?met=Livescore&APIkey=a10943e74d5f6b5225e523a43ddd99c7e3b3678d96a2091c93189206a81c6a34"
+        
+        ApiService.fetchFromApi(API_URL: API_URL_UPCOMMING) {  (data , dictionary) in
             self.events = data
+            let flag = dictionary.contains { $0.key == "result" }
             DispatchQueue.main.async{
                 self.latestResult.reloadData()
-
+                print(flag)
+                if flag
+                {
+                    print("upcomming appeared")
+                }else{
+                    self.showAlert()
+                }
                 UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
                     self.upComming.reloadData()
                     self.teams.reloadData()
@@ -79,7 +91,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         }
 
     
-        ApiService.fetchLatestRes(sport_type: self.sportType ?? "") { data in
+        ApiService.fetchFromApi(API_URL: API_URL_LATESTRES) { data,dictionary in
             self.latestEvents = data
             DispatchQueue.main.async{
                 
@@ -126,13 +138,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         }
             
             return latestEvents?.result.count ?? 0
-        
-        if sportType == "cricket"{
-            
-            return events?.result.count ?? 0
-        }
-       
-            return latestEvents?.result.count ?? 0
+
             
 
     }
@@ -269,7 +275,29 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         }
     }
     
-    
+    func showAlert(){
+        // declare Alert
+        let alert = UIAlertController(title: "⚠️", message: "missing data event", preferredStyle: .alert)
+        
+        
+        
+        //AddAction
+        alert.addAction(UIAlertAction(title: "continue", style: .default , handler: {  action in
+            print("continue clicked")
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "go back", style: UIAlertAction.Style.cancel , handler: { action in
+            print("Cancel clicked")
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+
+        //showAlert
+        self.present(alert, animated: true) {
+            print("alert done")
+        }
+    }
 
 
 }
