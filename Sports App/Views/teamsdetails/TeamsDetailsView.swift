@@ -130,10 +130,11 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
     }
     
     fileprivate func updateUI() {
-        
+         
+        favorite_btn.isSelected =  UserDefaults.standard.bool(forKey: self.favKey)
+
         
         favorite_btn.isSelected = !favorite_btn.isSelected
-        
         if favorite_btn.isSelected {
             
             favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
