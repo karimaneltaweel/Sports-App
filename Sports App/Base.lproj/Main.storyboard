@@ -12,7 +12,7 @@
         <!--Favorites-->
         <scene sceneID="wE9-se-oJi">
             <objects>
-                <viewController storyboardIdentifier="FavTeamTableVC" id="fng-bK-nf9" customClass="FavTeamTableVC" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavTeamTableVC" id="fng-bK-nf9" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C3V-Ee-cAC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                 <color key="backgroundColor" red="0.2117646933" green="0.2117646933" blue="0.1979144877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="sectionIndexBackgroundColor" red="0.15807771679999999" green="0.15807771679999999" blue="0.15807771679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" rowHeight="112" id="Bd5-8b-Wvs" customClass="FavoriteViewCell" customModule="Sports_App" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favCell" rowHeight="112" id="Bd5-8b-Wvs" customClass="FavViewCell" customModule="Sports_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bd5-8b-Wvs" id="fsd-p0-pE0">
@@ -79,9 +79,6 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="Favorites" image="fav" id="XV5-WS-V3r"/>
-                    <connections>
-                        <outlet property="table_v" destination="JiA-zc-128" id="mbS-Jz-aEV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3T-Sd-vvk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

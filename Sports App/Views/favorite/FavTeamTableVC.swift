@@ -14,7 +14,6 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
     
     var favoriteTeams : [FavoriteTeam] = []
 
-    @IBOutlet weak var table_v: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,7 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
     override func viewWillAppear(_ animated: Bool) {
         print("will Appear")
         favoriteTeams = CoreDataManager.fetchFromCoreData()
-        table_v.reloadData()
+//        table_v.reloadData()
     }
     
     
@@ -41,7 +40,7 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavoriteViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath) as! FavViewCell
         cell.layer.cornerRadius = 15
         cell.fav_label.text = favoriteTeams[indexPath.row].team_name
         
@@ -76,9 +75,9 @@ class FavTeamTableVC:   UIViewController, UITableViewDataSource , UITableViewDel
             print("ok clicked")
             CoreDataManager.deleteFromCoreData(team_name: favoriteTeams[indexPath.row].team_name ?? "")
             favoriteTeams.remove(at: indexPath.row)
-            table_v.deleteRows(at: [indexPath], with: .fade)
+//            table_v.deleteRows(at: [indexPath], with: .fade)
             
-                    table_v.reloadData()
+//                    table_v.reloadData()
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel , handler: { action in
