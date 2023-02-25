@@ -23,6 +23,8 @@ class LatestResultItem: UICollectionViewCell {
     
     override func layoutSublayers(of layer: CALayer) {
             super.layoutSublayers(of: layer)
+            self.layer.cornerRadius = 40
+            contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2))
             self.contentView.layer.cornerRadius = 40
             self.layer.masksToBounds = true
         
@@ -41,6 +43,7 @@ class LatestResultItem: UICollectionViewCell {
         
         scoreLabel.layer.cornerRadius = 15
         scoreLabel.clipsToBounds = true
+    
         }
     
     

@@ -15,7 +15,7 @@ class CoreDataManager
    static var appDelegate : AppDelegate?
     
     
-    static func saveToCoreData(team_name : String , team_logo : String)
+    static func saveToCoreData(team_name : String , team_logo : String , team_key : Int)
     {
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         
@@ -35,6 +35,7 @@ class CoreDataManager
             
             favorite_team.setValue(team_name, forKey: "teamName")
             favorite_team.setValue(team_logo, forKey: "teamLogo")
+            favorite_team.setValue(team_key, forKey: "teamKey")
 
             print("Saved Successfully")
             

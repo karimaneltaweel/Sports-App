@@ -18,7 +18,11 @@ class UpcomingItem: UICollectionViewCell {
     
     override func layoutSublayers(of layer: CALayer) {
             super.layoutSublayers(of: layer)
+        
             self.contentView.layer.cornerRadius = 40
+            self.layer.cornerRadius = 40
+            contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2))
+        
             self.team1Img.layer.cornerRadius = team1Img.frame.size.width/2
             self.team1Img.layer.cornerRadius = team1Img.frame.size.height/2
 
