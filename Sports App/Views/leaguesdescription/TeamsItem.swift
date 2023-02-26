@@ -20,5 +20,22 @@ class TeamsItem: UICollectionViewCell {
         self.layer.shadowColor = UIColor.white.cgColor
         self.layer.shadowRadius = 0.5
     }
+    
+    func configureCell(sportType : String , item:Event)
+    {
+        switch(sportType)
+        {
+        case "football":
+            teamsImage.kf.setImage(with: URL(string:item.home_team_logo ?? ""))
+        case "tennis":
+            teamsImage.kf.setImage(with: URL(string:item.event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
+        case "basketball":
+            teamsImage.kf.setImage(with: URL(string:item.event_home_team_logo ?? ""),placeholder: UIImage(named: "placeholder"))
+
+        default :
+            teamsImage.kf.setImage(with: URL(string:item.event_home_team_logo ?? ""),placeholder: UIImage(named: "cricketPH"))
+
+        }
+    }
 }
 

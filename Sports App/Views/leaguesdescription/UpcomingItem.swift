@@ -31,4 +31,47 @@ class UpcomingItem: UICollectionViewCell {
 
             self.layer.masksToBounds = true
         }
+    func configureCell(sportType : String , item:Event)
+    {
+        switch(sportType){
+        case "football" :
+           team1Label.text =  item.event_home_team
+        
+            team2Label.text = item.event_away_team
+            
+            team1Img.kf.setImage(with: URL(string:item.home_team_logo ?? ""),placeholder: UIImage(named: ""))
+
+            team2Img.kf.setImage(with: URL(string: item.away_team_logo ?? ""))
+            date.text = item.event_date
+           timeLabel.text = item.event_time
+            
+        case "tennis" :
+            team1Label.text =  item.event_first_player
+            timeLabel.text = item.event_time
+            team2Label.text = item.event_second_player
+            team1Img.kf.setImage(with: URL(string:item.event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
+            team2Img.kf.setImage(with: URL(string: item.event_second_player_logo ?? ""),placeholder: UIImage(named: "player2"))
+            date.text = item.event_date
+            
+        case "basketball":
+            team1Label.text =  item.event_home_team
+            team2Label.text = item.event_away_team
+            timeLabel.text = item.event_time
+            team1Img.kf.setImage(with: URL(string:item.event_home_team_logo ?? ""),placeholder: UIImage(named: "holder1"))
+            team2Img.kf.setImage(with: URL(string: item.event_away_team_logo ?? ""),placeholder: UIImage(named: "league"))
+            
+            date.text = item.event_date
+            
+        case "cricket":
+            
+            team1Label.text =  item.event_home_team
+            team2Label.text = item.event_away_team
+            team1Img.kf.setImage(with: URL(string:item.event_home_team_logo ?? ""),placeholder: UIImage(named: "cricket1"))
+            timeLabel.text = item.event_time
+           team2Img.kf.setImage(with: URL(string: item.event_away_team_logo ?? ""),placeholder: UIImage(named: "cricket2"))
+            date.text = item.event_date_start
+        default:
+           print("no type")
+        }
+    }
 }

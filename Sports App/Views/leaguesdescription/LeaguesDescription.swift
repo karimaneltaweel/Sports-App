@@ -163,46 +163,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         if (collectionView == upComming){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcoming", for: indexPath) as! UpcomingItem
             
-            switch(sportType){
-            case "football" :
-                cell.team1Label.text =  events?.result[indexPath.row].event_home_team
-            
-                cell.team2Label.text = events?.result[indexPath.row].event_away_team
-                
-                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].home_team_logo ?? ""),placeholder: UIImage(named: ""))
- 
-                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""))
-                cell.date.text = events?.result[indexPath.row].event_date
-                cell.timeLabel.text = events?.result[indexPath.row].event_time
-                
-            case "tennis" :
-                cell.team1Label.text =  events?.result[indexPath.row].event_first_player
-                cell.timeLabel.text = events?.result[indexPath.row].event_time
-                cell.team2Label.text = events?.result[indexPath.row].event_second_player
-                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
-                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_second_player_logo ?? ""),placeholder: UIImage(named: "player2"))
-                cell.date.text = events?.result[indexPath.row].event_date
-                
-            case "basketball":
-                cell.team1Label.text =  events?.result[indexPath.row].event_home_team
-                cell.team2Label.text = events?.result[indexPath.row].event_away_team
-                cell.timeLabel.text = events?.result[indexPath.row].event_time
-                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "holder1"))
-                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "league"))
-                
-                cell.date.text = events?.result[indexPath.row].event_date
-                
-            case "cricket":
-                
-                cell.team1Label.text =  events?.result[indexPath.row].event_home_team
-                cell.team2Label.text = events?.result[indexPath.row].event_away_team
-                cell.team1Img.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "cricket1"))
-                cell.timeLabel.text = events?.result[indexPath.row].event_time
-                cell.team2Img.kf.setImage(with: URL(string: events?.result[indexPath.row].event_away_team_logo ?? ""),placeholder: UIImage(named: "cricket2"))
-                cell.date.text = events?.result[indexPath.row].event_date_start
-            default:
-               print("no type")
-            }
+            cell.configureCell(sportType: sportType ?? "", item: (events?.result[indexPath.row]) ?? Event())
 
             return cell
             
@@ -210,28 +171,7 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         //------------- latest result collection --------------
          if (collectionView == latestResult){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latestresult", for: indexPath) as! LatestResultItem
-             switch(sportType){
-             case "tennis":
-                 cell.team1Label.text = latestEvents?.result[indexPath.row].event_first_player
-                 cell.team2Label.text = latestEvents?.result[indexPath.row].event_second_player
-                 cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
-                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
-                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].event_second_player_logo ?? ""),placeholder: UIImage(named: "player2"))
-                 
-             case "cricket":
-                 // get it from the same api of upcomming abd teams as it not found in latest res api
-                 cell.team1Label.text = events?.result[indexPath.row].event_home_team
-                 cell.team2Label.text = events?.result[indexPath.row].event_away_team
-                 cell.scoreLabel.text = events?.result[indexPath.row].event_away_final_result
-                 cell.team1img.kf.setImage(with: URL(string: events?.result[indexPath.row].home_team_logo ?? ""),placeholder: UIImage(named: "cricket1"))
-                 cell.team2img.kf.setImage(with: URL(string: events?.result[indexPath.row].away_team_logo ?? ""),placeholder: UIImage(named: "cricket2"))
-             default :
-                 cell.team1Label.text = latestEvents?.result[indexPath.row].event_home_team
-                 cell.team2Label.text = latestEvents?.result[indexPath.row].event_away_team
-                 cell.scoreLabel.text = latestEvents?.result[indexPath.row].event_final_result
-                 cell.team1img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].home_team_logo ?? ""),placeholder:UIImage(named:"holder1") )
-                 cell.team2img.kf.setImage(with: URL(string: latestEvents?.result[indexPath.row].away_team_logo ?? ""),placeholder: UIImage(named:"league"))
-             }
+             cell.configureCell(sportType: sportType ?? "", item: (events?.result[indexPath.row]) ?? Event(), latestResItem: latestEvents?.result[indexPath.row] ?? EventRes())
             
             return cell
             
@@ -240,20 +180,8 @@ class LeaguesDescription: UIViewController ,UICollectionViewDelegate,UICollectio
         // -------------- Teams collection ------------
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teams", for: indexPath) as! TeamsItem
-        switch(sportType)
-        {
-        case "football":
-            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].home_team_logo ?? ""))
-        case "tennis":
-            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].event_first_player_logo ?? ""),placeholder: UIImage(named: "player1"))
-        case "basketball":
-            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "placeholder"))
-
-        default :
-            cell.teamsImage.kf.setImage(with: URL(string:events?.result[indexPath.row].event_home_team_logo ?? ""),placeholder: UIImage(named: "cricketPH"))
-
-        }
-
+        
+        cell.configureCell(sportType: sportType ?? "", item: (events?.result[indexPath.row]) ?? Event())
 
         return cell
     }
