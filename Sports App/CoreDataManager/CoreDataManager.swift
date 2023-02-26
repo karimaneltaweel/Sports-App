@@ -47,41 +47,7 @@ class CoreDataManager
             print(error.localizedDescription)
         }
     }
-    
-    
-    
-//    static func saveStateOfButton(isFavorite : Bool)
-//    {
-//        appDelegate = UIApplication.shared.delegate as? AppDelegate
-//
-//        context = appDelegate?.persistentContainer.viewContext
-//
-//        guard let myContext = context else{return}
-//
-//        let entity = NSEntityDescription.entity(forEntityName: "Favorite", in: myContext)
-//
-//        guard let myEntity = entity else{return}
-//
-//        do{
-//
-//
-//            let favorite_team = NSManagedObject(entity: myEntity, insertInto: myContext)
-//
-//
-//            favorite_team.setValue(isFavorite, forKey: "isFavorite")
-//
-//            print("State Saved Successfully")
-//
-//
-//            try myContext.save()
-//
-//        }catch let error{
-//
-//            print(error.localizedDescription)
-//        }
-//    }
-    
-    
+
     
     static func deleteFromCoreData(team_name :String)
     {
@@ -134,11 +100,11 @@ class CoreDataManager
             
             for item in myteam
             {
-                var team_name = item.value(forKey: "teamName")
-                var team_logo = item.value(forKey: "teamLogo")
-                var team_key = item.value(forKey: "teamKey")
+                let team_name = item.value(forKey: "teamName")
+                let team_logo = item.value(forKey: "teamLogo")
+                let team_key = item.value(forKey: "teamKey")
 
-                var team = FavoriteTeam(team_name: team_name as? String ,team_logo: team_logo as? String,team_key: team_key as? Int)
+                let team = FavoriteTeam(team_name: team_name as? String ,team_logo: team_logo as? String,team_key: team_key as? Int)
                 
                 arrayOfFavTeam.append(team)
             }
