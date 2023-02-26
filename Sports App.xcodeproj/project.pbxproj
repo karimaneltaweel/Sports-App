@@ -120,13 +120,21 @@
 		070F76A629A02A980096D185 /* APIManger */ = {
 			isa = PBXGroup;
 			children = (
+				0713B5D129AB9CA5000239BB /* Model */,
+				8C8F353829A1405D001A0628 /* ApiService.swift */,
+			);
+			path = APIManger;
+			sourceTree = "<group>";
+		};
+		0713B5D129AB9CA5000239BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				8C8F353529A13FF4001A0628 /* LeaguesSports.swift */,
 				8C98353A29A040BB00388C1C /* Events.swift */,
-				8C8F353829A1405D001A0628 /* ApiService.swift */,
 				8CBC71B229A18F59002E4787 /* LatestRes.swift */,
 				DD2EAF8429A2BFCB00AAAC8B /* TeamDetails.swift */,
 			);
-			path = APIManger;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		07EE399E29A41C5F002CBA69 /* CoreDataManager */ = {

@@ -63,14 +63,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
                 DispatchQueue.main.async {
                     //-----------fetch-----user---defaults---------
                     self.favKey = "\(self.team_key ?? 0)"
-                    if UserDefaults.standard.bool(forKey: self.favKey){
-                        self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                        print("add fav")
-                        
-                    }else{
-                           self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-                           print("not fav")
-                    }
+                    self.userdefault(teamkey: self.team_key ?? 0)
 
                     self.teamImage.kf.setImage(with: URL(string:self.team_details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
                     self.teamImage.layer.cornerRadius = self.teamImage.frame.size.width/2.0
@@ -90,14 +83,7 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
                     self.favKey = "\(self.team_key ?? 0)"
                     print(self.favKey)
                     
-                    if UserDefaults.standard.bool(forKey: self.favKey){
-                        self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                        print("add fav")
-                        
-                    }else{
-                           self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
-                           print("not fav")
-                    }
+                    self.userdefault(teamkey: self.team_key ?? 0)
 
                     
                     self.teamImage.kf.setImage(with: URL(string:self.details?.result.first?.team_logo ?? ""),placeholder: UIImage(named: "teamHolder"))
@@ -231,6 +217,19 @@ class TeamsDetailsView: UIViewController,UICollectionViewDelegate,UICollectionVi
         UserDefaults.standard.set(false, forKey:  "\(key)")
         
     }
+    
+    func userdefault(teamkey:Int){
+            self.favKey = "\(self.team_key ?? 0)"
+            
+            if UserDefaults.standard.bool(forKey: self.favKey){
+                self.favorite_btn.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                
+            }else{
+                   self.favorite_btn.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
+
+        }
+    
 
 }
 
